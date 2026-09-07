@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 4 — 2.2.1.11 LAB: Python literals - strings</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2a;--text:#eaf2ff;--muted:#a9bad0;--accent:#34d399;--accent2:#60a5fa;--danger:#fb7185;--border:#29415c;--code:#050b13}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101d,#0a1727);color:var(--text);line-height:1.55}
+.wrap{max-width:1050px;margin:0 auto;padding:28px 18px 80px}.hero{background:linear-gradient(135deg,#0d2238,#0b1a2a);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:22px;box-shadow:0 18px 45px rgba(0,0,0,.25)}
+h1{margin:0 0 8px;font-size:2rem}h2{margin:0 0 12px;color:#fff}h3{margin:18px 0 8px;color:#d9e9ff}p{margin:8px 0 12px}.muted{color:var(--muted)}
+.card{background:rgba(13,27,42,.96);border:1px solid var(--border);border-radius:16px;padding:22px;margin:18px 0}.task-badge{display:inline-block;padding:5px 10px;border-radius:999px;background:#13314f;color:#bfe0ff;font-size:.85rem;font-weight:700;margin-bottom:10px}
+.code,.output{background:var(--code);color:#d6f7e6;border:1px solid #20354c;border-radius:10px;padding:14px 16px;overflow:auto;white-space:pre;font-family:"Courier New",monospace;font-size:.94rem;line-height:1.42}.output{color:#f0f6ff}
+.code.no-copy{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;cursor:default}.manual-entry-banner{border:2px solid #f59e0b;background:#2b1d06;color:#ffe7ad;padding:14px 16px;border-radius:10px;margin:14px 0;font-weight:700}
+.explain{width:100%;border-collapse:collapse;margin:12px 0 8px;background:#0a1624}.explain th,.explain td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}.explain th{background:#14314d}
+.callout{border-left:4px solid var(--accent2);background:#0b1c2d;padding:12px 14px;border-radius:8px;margin:12px 0}.warning{border-left-color:var(--danger)}
+.upload{border:2px dashed #496985;border-radius:12px;padding:16px;margin-top:18px;background:#0a1725}.upload label{font-weight:700;display:block;margin-bottom:8px}input[type=file]{width:100%;padding:10px;background:#0b1624;color:#fff;border:1px solid var(--border);border-radius:8px}.preview{margin-top:12px}.preview img{max-width:100%;max-height:420px;border-radius:10px;border:1px solid var(--border);display:block}
+textarea,input[type=text]{width:100%;border:1px solid #3c5671;border-radius:9px;background:#07111d;color:#fff;padding:12px;font:inherit}textarea{min-height:120px;resize:vertical}.student-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.student-grid label{display:block;font-weight:700;margin-bottom:6px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button{border:0;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;background:var(--accent);color:#042016;font-size:.96rem}button.secondary{background:#1d3550;color:#edf6ff;border:1px solid #3e5871}button.danger{background:#4a1c28;color:#ffdbe3;border:1px solid #7c2d3e}.status{margin-top:10px;color:#bdebd6;font-weight:700;min-height:24px}.footer-note{font-size:.9rem;color:var(--muted)}
+@media(max-width:760px){.student-grid{grid-template-columns:1fr}h1{font-size:1.55rem}.card{padding:16px}}
+@media print{body{background:#fff;color:#111}.wrap{max-width:none;padding:0}.hero,.card{background:#fff;color:#111;border:1px solid #bbb;box-shadow:none}.buttons,.status{display:none!important}.code,.output{background:#f4f4f4;color:#111;border:1px solid #ccc}.explain{background:#fff;color:#111}.explain th{background:#e9eef4;color:#111}textarea,input[type=text]{background:#fff;color:#111;border:1px solid #aaa}.upload{background:#fff;border:1px solid #bbb}}
+</style>
+</head>
+<body><div class="wrap">
+
+<section class="hero"><h1>Lab 4 — 2.2.1.11 LAB: Python literals - strings</h1><p class="muted">Step-by-Step Python Lab Guide</p>
+<div class="student-grid"><div><label for="studentName">Student Name</label><input id="studentName" type="text" placeholder="Enter your name"></div><div><label for="course">Course / Section</label><input id="course" type="text" placeholder="Enter course / section"></div><div><label for="labDate">Date</label><input id="labDate" type="text" placeholder="MM/DD/YYYY"></div></div></section>
+
+<section class="card"><h2>Objectives</h2>
+<ul><li>Practice working with Python string literals.</li><li>Display quotation marks inside a string by using escape characters.</li><li>Use <code>\n</code> to create multiple output lines from one <code>print()</code> statement.</li><li>Produce an exact required output using one line of Python code.</li></ul>
+<div class="manual-entry-banner">IMPORTANT: Do not copy and paste the Python code. You must type each line manually into your Python editor. The examples below are for visual reference only.</div></section>
+
+<section class="card"><h2>Before You Start — Save Your Python File</h2><p>Create a new Python file and save it before beginning the lab.</p><div class="code no-copy">Lab4.py</div><div class="callout"><strong>Important:</strong> Continue using this same <code>Lab4.py</code> file throughout the lab.</div></section>
+
+<section class="card task"><span class="task-badge">Task 1</span><h2>Understand the Expected Output</h2>
+<p>Before writing code, study the required output. It contains three separate lines and several quotation marks.</p>
+<h3>Required Output</h3><div class="output">"I'm"
+""learning""
+"""Python"""</div>
+<table class="explain"><tr><th>Line</th><th>What to Notice</th></tr><tr><td><code>"I'm"</code></td><td>The entire text is surrounded by double quotation marks, and the word <code>I'm</code> contains an apostrophe.</td></tr><tr><td><code>""learning""</code></td><td>The word <code>learning</code> has two double quotation marks before it and two after it.</td></tr><tr><td><code>"""Python"""</code></td><td>The word <code>Python</code> has three double quotation marks before it and three after it.</td></tr></table>
+<div class="upload"><label for="shot1">Upload Screenshot — Task 1</label><input class="shot" id="shot1" type="file" accept="image/*" data-task="1"><div class="preview" id="preview1"></div></div></section>
+
+<section class="card task"><span class="task-badge">Task 2</span><h2>Practice Displaying Quotation Marks</h2>
+<p>Quotation marks normally mark the beginning and end of a Python string. To display a double quotation mark as part of the output, place a backslash before it.</p>
+<h3>Type This Code Manually</h3><div class="code no-copy">print("\"I'm\"")</div>
+<h3>What Each Part Means</h3><table class="explain"><tr><th>Code</th><th>Explanation</th></tr><tr><td><code>\"</code></td><td>The backslash escapes the double quote, telling Python to display the quotation mark instead of treating it as the end of the string.</td></tr><tr><td><code>I'm</code></td><td>The apostrophe is part of the text. Because the surrounding Python string uses double quotes, the apostrophe does not end the string.</td></tr><tr><td><code>print(...)</code></td><td>Displays the completed string.</td></tr></table>
+<h3>Expected Output</h3><div class="output">"I'm"</div>
+<div class="upload"><label for="shot2">Upload Screenshot — Task 2</label><input class="shot" id="shot2" type="file" accept="image/*" data-task="2"><div class="preview" id="preview2"></div></div></section>
+
+<section class="card task"><span class="task-badge">Task 3</span><h2>Use <code>\n</code> to Create New Lines</h2>
+<p>The newline escape sequence <code>\n</code> moves the following output to the next line without requiring another <code>print()</code> statement.</p>
+<h3>Type This Code Manually</h3><div class="code no-copy">print("\"I'm\"\n\"\"learning\"\"")</div>
+<table class="explain"><tr><th>Code</th><th>Explanation</th></tr><tr><td><code>\n</code></td><td>Ends the first output line and moves the next characters to a new line.</td></tr><tr><td><code>\"\"</code></td><td>Two escaped double quotes are displayed before and after <code>learning</code>.</td></tr></table>
+<h3>Expected Output</h3><div class="output">"I'm"
+""learning""</div>
+<div class="upload"><label for="shot3">Upload Screenshot — Task 3</label><input class="shot" id="shot3" type="file" accept="image/*" data-task="3"><div class="preview" id="preview3"></div></div></section>
+
+<section class="card task"><span class="task-badge">Task 4</span><h2>Create the Complete Output with One <code>print()</code></h2>
+<p>Now combine the escape characters and newline characters into one Python statement.</p>
+<h3>Type This Final Code Manually</h3><div class="code no-copy">print("\"I'm\"\n\"\"learning\"\"\n\"\"\"Python\"\"\"")</div>
+<h3>How the Final Line Works</h3><table class="explain"><tr><th>Part</th><th>Purpose</th></tr><tr><td><code>\"I'm\"</code></td><td>Produces the first line with one double quote on each side.</td></tr><tr><td><code>\n</code></td><td>Moves to the second line.</td></tr><tr><td><code>\"\"learning\"\"</code></td><td>Produces the second line with two double quotes on each side.</td></tr><tr><td><code>\n</code></td><td>Moves to the third line.</td></tr><tr><td><code>\"\"\"Python\"\"\"</code></td><td>Produces the third line with three double quotes on each side.</td></tr></table>
+<h3>Expected Output</h3><div class="output">"I'm"
+""learning""
+"""Python"""</div>
+<div class="upload"><label for="shot4">Upload Screenshot — Task 4</label><input class="shot" id="shot4" type="file" accept="image/*" data-task="4"><div class="preview" id="preview4"></div></div></section>
+
+<section class="card task"><span class="task-badge">Task 5</span><h2>Verify Your Final Program</h2>
+<p>Run <code>Lab4.py</code> and compare your output carefully with the required output.</p>
+<h3>Verification Checklist</h3><table class="explain"><tr><th>Check</th><th>Requirement</th></tr><tr><td>Number of Python statements</td><td>Your solution should use one <code>print()</code> statement.</td></tr><tr><td>Number of output lines</td><td>The result should contain exactly three lines.</td></tr><tr><td>Line 1</td><td><code>"I'm"</code></td></tr><tr><td>Line 2</td><td><code>""learning""</code></td></tr><tr><td>Line 3</td><td><code>"""Python"""</code></td></tr></table>
+<div class="upload"><label for="shot5">Upload Screenshot — Task 5</label><input class="shot" id="shot5" type="file" accept="image/*" data-task="5"><div class="preview" id="preview5"></div></div></section>
+
+<section class="card"><h2>Reflection Questions</h2><p>Type your answers below. They will be included in the generated PDF.</p>
+<div><label for="r1"><strong>1. What does a backslash <code>\</code> do when it is placed before a double quotation mark inside a Python string?</strong></label><textarea id="r1" class="reflection" placeholder="Type your answer here..."></textarea></div>
+<div><label for="r2"><strong>2. What does <code>\n</code> do inside a Python string?</strong></label><textarea id="r2" class="reflection" placeholder="Type your answer here..."></textarea></div>
+<div><label for="r3"><strong>3. Why would the quotation marks cause a syntax problem if they were not escaped correctly?</strong></label><textarea id="r3" class="reflection" placeholder="Type your answer here..."></textarea></div>
+<div><label for="r4"><strong>4. How many output lines did one <code>print()</code> statement create in the final program?</strong></label><textarea id="r4" class="reflection" placeholder="Type your answer here..."></textarea></div>
+<div><label for="r5"><strong>5. In your own words, explain how escape characters helped you create the required output.</strong></label><textarea id="r5" class="reflection" placeholder="Type your answer here..."></textarea></div></section>
+
+<section class="card"><h2>After Completing the Lab</h2><h3>1. Confirm Your Python Filename</h3><p>Your Python file should be saved as:</p><div class="code no-copy">Lab4.py</div><h3>2. Generate Your Lab PDF</h3><p>Make sure all screenshots and reflection answers are complete, then click <strong>Generate PDF</strong>.</p><h3>3. Submit to Blackboard</h3><p>Upload the files required by your instructor to the Lab 4 assignment area in Blackboard.</p></section>
+
+<section class="card"><h2>Finish and Submit</h2><p><strong>Save Progress</strong> stores your typed answers and screenshots in this browser on this device. Use <strong>Generate PDF</strong> when finished.</p><div class="buttons"><button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button><button id="printBtn" class="secondary" type="button">Print / Save as PDF</button><button id="clearBtn" class="danger" type="button">Clear Saved Progress</button></div><div class="status" id="status"></div><p class="footer-note">Automatic PDF generation uses online browser libraries. If they are blocked, use “Print / Save as PDF” as a backup.</p></section>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const STORAGE_KEY="lab4_python_literals_string_v1",imageData={};
+function setStatus(m,e=false){const s=document.getElementById("status");s.textContent=m;s.style.color=e?"#ffb4c0":"#bdebd6"}
+function compressImage(f,w=1400,q=.78){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>{const i=new Image();i.onload=()=>{const sc=Math.min(1,w/i.width),c=document.createElement("canvas");c.width=Math.round(i.width*sc);c.height=Math.round(i.height*sc);c.getContext("2d").drawImage(i,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",q))};i.onerror=rej;i.src=e.target.result};r.onerror=rej;r.readAsDataURL(f)})}
+document.querySelectorAll(".shot").forEach(x=>x.addEventListener("change",async()=>{const t=x.dataset.task,f=x.files[0];if(!f)return;try{setStatus("Preparing screenshot...");const d=await compressImage(f);imageData["shot"+t]=d;document.getElementById("preview"+t).innerHTML='<img src="'+d+'" alt="Task '+t+' screenshot">';setStatus("Screenshot added for Task "+t+". Click Save Progress to keep it.")}catch(e){setStatus("Could not read that image. Try a PNG or JPG screenshot.",true)}}));
+document.querySelectorAll(".code.no-copy").forEach(b=>{b.addEventListener("copy",e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.")});b.addEventListener("cut",e=>e.preventDefault());b.addEventListener("contextmenu",e=>{e.preventDefault();setStatus("Please type the code manually instead of copying it.")});b.addEventListener("dragstart",e=>e.preventDefault())});
+function collectData(){const d={studentName:studentName.value,course:course.value,labDate:labDate.value,reflections:{},screenshots:imageData};document.querySelectorAll(".reflection").forEach(t=>d.reflections[t.id]=t.value);return d}
+function applyData(d){if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"";labDate.value=d.labDate||"";if(d.reflections)Object.entries(d.reflections).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v||""});if(d.screenshots)Object.entries(d.screenshots).forEach(([id,v])=>{imageData[id]=v;const t=id.replace("shot",""),p=document.getElementById("preview"+t);if(p&&v)p.innerHTML='<img src="'+v+'" alt="Task '+t+' screenshot">'})}
+saveBtn.onclick=()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(collectData()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Browser storage is full. Try smaller screenshots.",true)}};
+clearBtn.onclick=()=>{if(confirm("Clear all saved answers and screenshots?")){localStorage.removeItem(STORAGE_KEY);location.reload()}};
+printBtn.onclick=()=>window.print();
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+
+function buildPdfPages(){
+  const d=collectData();
+  const pages=[];
+
+  function makePage(inner){
+    const page=document.createElement("div");
+    page.className="pdf-page";
+    page.style.cssText=[
+      "position:absolute",
+      "left:-100000px",
+      "top:0",
+      "width:794px",
+      "min-height:1123px",
+      "background:#fff",
+      "color:#111",
+      "padding:42px",
+      "font-family:Arial,sans-serif",
+      "line-height:1.45",
+      "box-sizing:border-box"
+    ].join(";");
+    page.innerHTML=inner;
+    document.body.appendChild(page);
+    pages.push(page);
+    return page;
+  }
+
+  // Cover / student information page
+  makePage(`
+    <h1 style="margin:0 0 10px;font-size:28px">Lab 4 — 2.2.1.11 LAB: Python literals - strings</h1>
+    <p style="font-size:16px;margin:0 0 16px">
+      <strong>Student:</strong> ${esc(d.studentName)} &nbsp;&nbsp;
+      <strong>Course:</strong> ${esc(d.course)} &nbsp;&nbsp;
+      <strong>Date:</strong> ${esc(d.labDate)}
+    </p>
+    <hr style="margin:18px 0 28px">
+    <h2>Task Evidence</h2>
+    <p>The following pages contain the screenshots submitted for Tasks 1–5.</p>
+  `);
+
+  // One screenshot per PDF page so screenshots are never cut between pages.
+  for(let i=1;i<=5;i++){
+    const shot=d.screenshots["shot"+i];
+    makePage(`
+      <h2 style="margin:0 0 18px">Task ${i} Screenshot</h2>
+      ${shot
+        ? `<div style="height:940px;display:flex;align-items:flex-start;justify-content:center">
+             <img src="${shot}" style="max-width:100%;max-height:900px;object-fit:contain;border:1px solid #bbb">
+           </div>`
+        : `<p><em>No screenshot uploaded.</em></p>`
+      }
+    `);
+  }
+
+  const qs=[
+    "What does a backslash do when placed before a double quotation mark inside a Python string?",
+    "What does \n do inside a Python string?",
+    "Why would quotation marks cause a syntax problem if they were not escaped correctly?",
+    "How many output lines did one print() statement create in the final program?",
+    "In your own words, explain how escape characters helped you create the required output."
+  ];
+
+  // Each reflection question gets its own page.
+  // This prevents a question or answer from being split/cut at a page boundary.
+  qs.forEach((q,i)=>{
+    const ans=d.reflections["r"+(i+1)]||"";
+    makePage(`
+      <h2 style="margin:0 0 24px">Reflection Question ${i+1}</h2>
+      <p style="font-size:18px;font-weight:700;margin:0 0 18px">${i+1}. ${esc(q)}</p>
+      <div style="
+        white-space:pre-wrap;
+        border:1px solid #bbb;
+        padding:16px;
+        min-height:760px;
+        font-size:16px;
+        overflow-wrap:anywhere;
+        word-break:break-word;
+        box-sizing:border-box;
+      ">${esc(ans)}</div>
+    `);
+  });
+
+  return pages;
+}
+
+pdfBtn.onclick=async()=>{
+  pdfBtn.disabled=true;
+  setStatus("Creating PDF...");
+  let pages=[];
+
+  try{
+    if(!window.html2canvas||!window.jspdf){
+      throw new Error("PDF library unavailable");
+    }
+
+    pages=buildPdfPages();
+    await new Promise(x=>setTimeout(x,400));
+
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF("p","mm","a4");
+
+    for(let i=0;i<pages.length;i++){
+      const canvas=await html2canvas(pages[i],{
+        scale:1.35,
+        useCORS:true,
+        backgroundColor:"#fff"
+      });
+
+      if(i>0) pdf.addPage();
+
+      const pageW=210,pageH=297;
+      const img=canvas.toDataURL("image/jpeg",0.92);
+      pdf.addImage(img,"JPEG",0,0,pageW,pageH);
+    }
+
+    const safe=(studentName.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");
+    pdf.save(safe+"_Lab4_Python_Literals_String.pdf");
+    setStatus("PDF generated. Reflection questions will no longer be cut between pages.");
+  }catch(e){
+    console.error(e);
+    setStatus("Automatic PDF generation is unavailable. Opening print dialog...",true);
+    setTimeout(()=>window.print(),500);
+  }finally{
+    pages.forEach(p=>p.remove());
+    pdfBtn.disabled=false;
+  }
+};
+window.addEventListener("DOMContentLoaded",()=>{const s=localStorage.getItem(STORAGE_KEY);if(s)try{applyData(JSON.parse(s));setStatus("Saved progress restored.")}catch(e){}});
+</script></body></html>
