@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab 5 — 2.4.1.7 LAB: Variables</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2a;--text:#eaf2ff;--muted:#a9bad0;--accent:#34d399;--accent2:#60a5fa;--danger:#fb7185;--border:#29415c;--code:#050b13}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#06101d,#0a1727);color:var(--text);line-height:1.55}
+.wrap{max-width:1050px;margin:0 auto;padding:28px 18px 80px}.hero{background:linear-gradient(135deg,#0d2238,#0b1a2a);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:22px;box-shadow:0 18px 45px rgba(0,0,0,.25)}
+h1{margin:0 0 8px;font-size:2rem}h2{margin:0 0 12px;color:#fff}h3{margin:18px 0 8px;color:#d9e9ff}p{margin:8px 0 12px}.muted{color:var(--muted)}
+.card{background:rgba(13,27,42,.96);border:1px solid var(--border);border-radius:16px;padding:22px;margin:18px 0}.task-badge{display:inline-block;padding:5px 10px;border-radius:999px;background:#13314f;color:#bfe0ff;font-size:.85rem;font-weight:700;margin-bottom:10px}
+.code,.output{background:var(--code);color:#d6f7e6;border:1px solid #20354c;border-radius:10px;padding:14px 16px;overflow:auto;white-space:pre;font-family:"Courier New",monospace;font-size:.94rem;line-height:1.42}.output{color:#f0f6ff}
+.code.no-copy{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;cursor:default}.manual-entry-banner{border:2px solid #f59e0b;background:#2b1d06;color:#ffe7ad;padding:14px 16px;border-radius:10px;margin:14px 0;font-weight:700}
+.explain{width:100%;border-collapse:collapse;margin:12px 0 8px;background:#0a1624}.explain th,.explain td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}.explain th{background:#14314d}
+.callout{border-left:4px solid var(--accent2);background:#0b1c2d;padding:12px 14px;border-radius:8px;margin:12px 0}.warning{border-left-color:var(--danger)}
+.upload{border:2px dashed #496985;border-radius:12px;padding:16px;margin-top:18px;background:#0a1725}.upload label{font-weight:700;display:block;margin-bottom:8px}input[type=file]{width:100%;padding:10px;background:#0b1624;color:#fff;border:1px solid var(--border);border-radius:8px}.preview{margin-top:12px}.preview img{max-width:100%;max-height:420px;border-radius:10px;border:1px solid var(--border);display:block}
+textarea,input[type=text]{width:100%;border:1px solid #3c5671;border-radius:9px;background:#07111d;color:#fff;padding:12px;font:inherit}textarea{min-height:120px;resize:vertical}.student-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.student-grid label{display:block;font-weight:700;margin-bottom:6px}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}button{border:0;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer;background:var(--accent);color:#042016;font-size:.96rem}button.secondary{background:#1d3550;color:#edf6ff;border:1px solid #3e5871}button.danger{background:#4a1c28;color:#ffdbe3;border:1px solid #7c2d3e}.status{margin-top:10px;color:#bdebd6;font-weight:700;min-height:24px}.footer-note{font-size:.9rem;color:var(--muted)}
+@media(max-width:760px){.student-grid{grid-template-columns:1fr}h1{font-size:1.55rem}.card{padding:16px}}
+@media print{body{background:#fff;color:#111}.wrap{max-width:none;padding:0}.hero,.card{background:#fff;color:#111;border:1px solid #bbb;box-shadow:none}.buttons,.status{display:none!important}.code,.output{background:#f4f4f4;color:#111;border:1px solid #ccc}.explain{background:#fff;color:#111}.explain th{background:#e9eef4;color:#111}textarea,input[type=text]{background:#fff;color:#111;border:1px solid #aaa}.upload{background:#fff;border:1px solid #bbb}}
+</style>
+</head>
+<body><div class="wrap">
+
+<section class="hero"><h1>Lab 5 — 2.4.1.7 LAB: Variables</h1><p class="muted">Step-by-Step Python Lab Guide</p>
+<div class="student-grid"><div><label for="studentName">Student Name</label><input id="studentName" type="text" placeholder="Enter your name"></div><div><label for="course">Course / Section</label><input id="course" type="text" placeholder="Enter course / section"></div><div><label for="labDate">Date</label><input id="labDate" type="text" placeholder="MM/DD/YYYY"></div></div></section>
+
+<section class="card"><h2>Objectives</h2><ul><li>Create and assign integer variables.</li><li>Print multiple variable values on one line.</li><li>Calculate a total using the addition operator.</li><li>Experiment with +, -, *, /, and //.</li><li>Print strings and integer variables together.</li></ul></section>
+<section class="card"><h2>Before You Start — Save Your Python File</h2><p>You may use your favorite Python IDE or code editor. <strong>GitHub Codespaces is recommended</strong> because it provides a ready-to-use Visual Studio Code environment in your browser.</p><p>Create a new Python file and save it as:</p><div class="code no-copy">Lab5.py</div><div class="callout"><strong>Important:</strong> Continue using this same <code>Lab5.py</code> file throughout the lab. Type all code manually; copying from code boxes is disabled.</div><p><strong>Source-guide note:</strong> The uploaded guide refers to apple values from a scenario, but the guide itself does not list the three numbers. Use the values provided by your instructor/scenario for John, Mary, and Adam.</p></section>
+<section class="task"><h2>Task 1 — Create Variables</h2><p>Create three integer variables named <code>john</code>, <code>mary</code>, and <code>adam</code>.</p><div class="code no-copy">john = YOUR_INTEGER
+mary = YOUR_INTEGER
+adam = YOUR_INTEGER</div><p>Replace each placeholder with the apple value assigned in your scenario.</p><div class="upload"><label>Upload Task 1 Screenshot</label><input type="file" accept="image/*" data-shot="shot1"><img class="preview" data-preview="shot1"></div></section>
+<section class="task"><h2>Task 2 — Print the Variables</h2><p>Print all three values on the same line and separate them with commas.</p><div class="code no-copy">print(john, mary, adam, sep=",")</div><div class="expected"><strong>Expected format:</strong><div class="code no-copy">JohnValue,MaryValue,AdamValue</div></div><div class="upload"><label>Upload Task 2 Screenshot</label><input type="file" accept="image/*" data-shot="shot2"><img class="preview" data-preview="shot2"></div></section>
+<section class="task"><h2>Task 3 — Create a Total Variable</h2><p>Create <code>total_apples</code> and store the sum of all three variables.</p><div class="code no-copy">total_apples = john + mary + adam</div><p>The <code>+</code> operator adds the integer values and stores the result in <code>total_apples</code>.</p><div class="upload"><label>Upload Task 3 Screenshot</label><input type="file" accept="image/*" data-shot="shot3"><img class="preview" data-preview="shot3"></div></section>
+<section class="task"><h2>Task 4 — Print the Total</h2><p>Print the total, then practice displaying a string and an integer variable together.</p><div class="code no-copy">print(total_apples)
+print("Total number of apples:", total_apples)</div><div class="expected"><strong>Expected format:</strong><div class="code no-copy">Total number of apples: YOUR_TOTAL</div></div><div class="upload"><label>Upload Task 4 Screenshot</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div></section>
+<section class="task"><h2>Task 5 — Experiment with Your Code</h2><p>Create new variables with different values and experiment with addition, subtraction, multiplication, division, and integer division.</p><div class="code no-copy">a = 10
+b = 3
+
+print(a + b)
+print(a - b)
+print(a * b)
+print(a / b)
+print(a // b)</div><p>Observe the results, especially the difference between <code>/</code> and <code>//</code>. Also practice printing strings and integer variables on the same line.</p><div class="upload"><label>Upload Task 5 Screenshot</label><input type="file" accept="image/*" data-shot="shot5"><img class="preview" data-preview="shot5"></div></section>
+<section class="card"><h2>Reflection Questions</h2><p>Type your answers below. They will be included in the generated PDF.</p>
+<label>1. What is a variable in Python?</label><textarea class="reflection" id="r1"></textarea>
+<label>2. Why are the apple values stored as integers?</label><textarea class="reflection" id="r2"></textarea>
+<label>3. What does the + operator do when calculating total_apples?</label><textarea class="reflection" id="r3"></textarea>
+<label>4. What difference did you observe between / and //?</label><textarea class="reflection" id="r4"></textarea>
+<label>5. How can you print a string and an integer variable on the same line?</label><textarea class="reflection" id="r5"></textarea></section>
+<section class="card"><h2>After Completing the Lab</h2><p>Confirm that your Python file is saved as <code>Lab5.py</code>. Make sure all screenshots and reflection answers are complete, click <strong>Generate PDF</strong>, and submit the required files to the Lab 5 assignment in Blackboard.</p></section>
+<section class="card"><h2>Finish and Submit</h2><p><strong>Save Progress</strong> stores your typed answers and screenshots in this browser on this device. Use <strong>Generate PDF</strong> when finished.</p><div class="buttons"><button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button><button id="printBtn" class="secondary" type="button">Print / Save as PDF</button><button id="clearBtn" class="danger" type="button">Clear Saved Progress</button></div><div class="status" id="status"></div><p class="footer-note">Automatic PDF generation uses online browser libraries. If they are blocked, use “Print / Save as PDF” as a backup.</p></section>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const STORAGE_KEY="lab5_variables_v1",imageData={};
+function setStatus(m,e=false){const s=document.getElementById("status");s.textContent=m;s.style.color=e?"#ffb4c0":"#bdebd6"}
+function compressImage(f,w=1400,q=.78){return new Promise((res,rej)=>{const r=new FileReader();r.onload=e=>{const i=new Image();i.onload=()=>{const sc=Math.min(1,w/i.width),c=document.createElement("canvas");c.width=Math.round(i.width*sc);c.height=Math.round(i.height*sc);c.getContext("2d").drawImage(i,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",q))};i.onerror=rej;i.src=e.target.result};r.onerror=rej;r.readAsDataURL(f)})}
+document.querySelectorAll(".shot").forEach(x=>x.addEventListener("change",async()=>{const t=x.dataset.task,f=x.files[0];if(!f)return;try{setStatus("Preparing screenshot...");const d=await compressImage(f);imageData["shot"+t]=d;document.getElementById("preview"+t).innerHTML='<img src="'+d+'" alt="Task '+t+' screenshot">';setStatus("Screenshot added for Task "+t+". Click Save Progress to keep it.")}catch(e){setStatus("Could not read that image. Try a PNG or JPG screenshot.",true)}}));
+document.querySelectorAll(".code.no-copy").forEach(b=>{b.addEventListener("copy",e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.")});b.addEventListener("cut",e=>e.preventDefault());b.addEventListener("contextmenu",e=>{e.preventDefault();setStatus("Please type the code manually instead of copying it.")});b.addEventListener("dragstart",e=>e.preventDefault())});
+function collectData(){const d={studentName:studentName.value,course:course.value,labDate:labDate.value,reflections:{},screenshots:imageData};document.querySelectorAll(".reflection").forEach(t=>d.reflections[t.id]=t.value);return d}
+function applyData(d){if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"";labDate.value=d.labDate||"";if(d.reflections)Object.entries(d.reflections).forEach(([id,v])=>{const e=document.getElementById(id);if(e)e.value=v||""});if(d.screenshots)Object.entries(d.screenshots).forEach(([id,v])=>{imageData[id]=v;const t=id.replace("shot",""),p=document.getElementById("preview"+t);if(p&&v)p.innerHTML='<img src="'+v+'" alt="Task '+t+' screenshot">'})}
+saveBtn.onclick=()=>{try{localStorage.setItem(STORAGE_KEY,JSON.stringify(collectData()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Browser storage is full. Try smaller screenshots.",true)}};
+clearBtn.onclick=()=>{if(confirm("Clear all saved answers and screenshots?")){localStorage.removeItem(STORAGE_KEY);location.reload()}};
+printBtn.onclick=()=>window.print();
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+
+
+function buildCompactPdfPages(){
+  const data=collectData();
+  const pages=[];
+  const escapeText=esc;
+
+  function makePage(inner){
+    const page=document.createElement("div");
+    page.className="pdf-page";
+    page.style.cssText=[
+      "position:absolute","left:-100000px","top:0","width:794px","min-height:1123px",
+      "background:#fff","color:#111","padding:42px","font-family:Arial,sans-serif",
+      "line-height:1.45","box-sizing:border-box"
+    ].join(";");
+    page.innerHTML=inner;
+    document.body.appendChild(page);
+    pages.push(page);
+    return page;
+  }
+
+  makePage(`
+    <h1 style="margin:0 0 10px;font-size:28px">Lab 5 — 2.4.1.7 LAB: Variables</h1>
+    <p style="font-size:16px;margin:0 0 16px">
+      <strong>Student:</strong> ${escapeText(data.studentName||"")} &nbsp;&nbsp;
+      <strong>Course:</strong> ${escapeText(data.course||"")} &nbsp;&nbsp;
+      <strong>Date:</strong> ${escapeText(data.labDate||"")}
+    </p>
+    <hr style="margin:18px 0 28px">
+    <h2>Task Evidence</h2>
+    <p>Screenshots are arranged two per page and automatically scaled to fit.</p>
+  `);
+
+  const screenshotItems=[];
+  for(let i=1;i<=5;i++){
+    screenshotItems.push({
+      label:"Task "+i+" Screenshot",
+      shot:data.screenshots["shot"+i]
+    });
+  }
+
+  for(let groupStart=0;groupStart<screenshotItems.length;groupStart+=2){
+    const group=screenshotItems.slice(groupStart,groupStart+2);
+    let screenshotHtml=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;
+
+    group.forEach(item=>{
+      screenshotHtml+=`
+        <div style="margin:0 0 22px;break-inside:avoid">
+          <p style="font-size:16px;font-weight:700;margin:0 0 8px">${item.label}</p>
+          <div style="
+            height:430px;border:1px solid #bbb;padding:10px;display:flex;
+            align-items:center;justify-content:center;box-sizing:border-box;background:#fff;
+          ">
+            ${item.shot
+              ? `<img src="${item.shot}" style="max-width:100%;max-height:100%;object-fit:contain;display:block">`
+              : `<em style="color:#555">No screenshot uploaded.</em>`
+            }
+          </div>
+        </div>
+      `;
+    });
+
+    makePage(screenshotHtml);
+  }
+
+  const questions=[
+    "What is a variable in Python?",
+    "Why are the apple values stored as integers?",
+    "What does the + operator do when calculating total_apples?",
+    "What difference did you observe between / and //?",
+    "How can you print a string and an integer variable on the same line?"
+  ];
+
+  for(let groupStart=0;groupStart<questions.length;groupStart+=3){
+    const group=questions.slice(groupStart,groupStart+3);
+    let reflectionHtml=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;
+
+    group.forEach((q,offset)=>{
+      const idx=groupStart+offset;
+      const ans=data.reflections["r"+(idx+1)]||"";
+      reflectionHtml+=`
+        <div style="margin:0 0 22px;break-inside:avoid">
+          <p style="font-size:16px;font-weight:700;margin:0 0 8px;line-height:1.35">
+            ${idx+1}. ${escapeText(q)}
+          </p>
+          <div style="
+            white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;
+            font-size:14px;line-height:1.4;overflow-wrap:anywhere;word-break:break-word;
+            box-sizing:border-box;
+          ">${escapeText(ans)}</div>
+        </div>
+      `;
+    });
+
+    makePage(reflectionHtml);
+  }
+
+  return pages;
+}
+
+async function generateCompactPDF(){
+  const btn=document.getElementById("pdfBtn");
+  btn.disabled=true;
+  setStatus("Creating PDF...");
+  let pages=[];
+
+  try{
+    if(!window.html2canvas||!window.jspdf) throw new Error("PDF library unavailable");
+
+    pages=buildCompactPdfPages();
+    await new Promise(r=>setTimeout(r,400));
+
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF("p","mm","a4");
+
+    for(let i=0;i<pages.length;i++){
+      const canvas=await html2canvas(pages[i],{
+        scale:1.35,useCORS:true,backgroundColor:"#ffffff"
+      });
+      if(i>0) pdf.addPage();
+      pdf.addImage(canvas.toDataURL("image/jpeg",0.92),"JPEG",0,0,210,297);
+    }
+
+    const safe=(document.getElementById("studentName").value.trim()||"Student")
+      .replace(/[^a-z0-9_-]+/gi,"_");
+    pdf.save(safe+"_Lab5_Variables.pdf");
+    setStatus("PDF generated with compact, aligned screenshots and reflection pages.");
+  }catch(e){
+    console.error(e);
+    setStatus("Automatic PDF generation is unavailable. Opening the browser print dialog instead...",true);
+    setTimeout(()=>window.print(),500);
+  }finally{
+    pages.forEach(p=>p.remove());
+    btn.disabled=false;
+  }
+}
+document.getElementById("pdfBtn").addEventListener("click",generateCompactPDF);
+
+window.addEventListener("DOMContentLoaded",()=>{const s=localStorage.getItem(STORAGE_KEY);if(s)try{applyData(JSON.parse(s));setStatus("Saved progress restored.")}catch(e){}});
+</script></body></html>
