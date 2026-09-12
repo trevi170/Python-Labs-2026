@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 8 — 2.5.1.2 LAB: Comments</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--bg:#07111f;--panel:#0e1b2d;--text:#eaf2ff;--muted:#b9c8dc;--accent:#48d7ff;--border:#28415e;--good:#70e6a0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#06101d,#0b1b30);color:var(--text);font-family:Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1050px;margin:auto;padding:28px 18px 70px}.hero,.card{background:rgba(14,27,45,.96);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+h1{margin:0 0 8px;font-size:31px}h2{margin-top:0}.muted{color:var(--muted)}.tag{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:4px 9px;border-radius:999px;font-size:13px}
+.notice{border-left:4px solid var(--accent);padding:12px 14px;background:#0a2033;border-radius:8px}.warning{border-left-color:#ffcc66;background:#33280a}.code{background:#020811;border:1px solid #20384f;border-radius:10px;padding:15px;white-space:pre-wrap;font:15px/1.55 Menlo,Consolas,monospace;color:#d9f6ff}
+.code.no-copy{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;cursor:default}.expected{background:#08150e;border-color:#244c33}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:700;display:block;margin-bottom:6px}
+input[type=text],input[type=date],textarea{width:100%;padding:11px;border-radius:8px;border:1px solid #45617e;background:#071321;color:#fff;font:inherit}
+textarea{min-height:115px;resize:vertical}.upload{border:1px dashed #54708e;border-radius:10px;padding:14px;margin-top:14px}.preview{max-width:100%;max-height:360px;display:block;margin-top:10px;border-radius:8px}
+button{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer;margin:5px;background:var(--accent);color:#04101b}.secondary{background:#29435f;color:#fff}.danger{background:#7b2f3c;color:#fff}
+.actions{position:sticky;bottom:10px;background:rgba(5,13,24,.94);border:1px solid var(--border);padding:10px;border-radius:12px;z-index:4}.status{margin-left:8px;color:var(--good)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:25px}}
+@media print{body{background:#fff;color:#111}.actions{display:none}.hero,.card{box-shadow:none;background:#fff;color:#111;border:1px solid #ccc}.code{color:#111;background:#f6f6f6}}
+</style>
+</head>
+<body><main class="wrap">
+
+<section class="hero">
+<span class="tag">Python Fundamentals</span>
+<h1>Lab 8 — 2.5.1.2 LAB: Comments</h1>
+<p class="muted">Learn what Python comments are, how to turn code on or off with the # symbol, and how clear variable names and useful comments make programs easier to understand.</p>
+</section>
+
+<section class="card">
+<h2>Before You Begin</h2>
+<div class="grid">
+<div><label>Student Name</label><input id="studentName" type="text"></div>
+<div><label>Course</label><input id="course" type="text" value="ITSE 2421"></div>
+<div><label>Date</label><input id="labDate" type="date"></div>
+</div>
+<p><strong>Python filename:</strong> <code>Lab8.py</code></p>
+<div class="notice"><strong>Development environment:</strong> You may use your favorite Python IDE or code editor. <strong>GitHub Codespaces is recommended</strong> because it provides a ready-to-use Visual Studio Code environment directly in your browser.</div>
+<p><strong>Important:</strong> Type all Python code manually. Copying from the code reference boxes is disabled.</p>
+<div class="notice"><strong>Quick Guide — What is a comment?</strong><br>A comment is a note written inside a Python program for people to read. Python ignores comments when the program runs. A comment begins with the <code>#</code> symbol.<br><br><code># This is a comment</code><br><code>hours = 2  # This is also a comment</code></div>
+<div class="notice warning"><strong>Important:</strong> If <code>#</code> is placed in front of a line of Python code, that entire line becomes a comment and Python will not run it. Removing the <code>#</code> makes that line active again.</div>
+</section>
+
+<section class="card">
+<h2>Lab Scenario</h2>
+<p>The starter program contains several Python comments. Your job is to improve the program by deciding which comments are useful, which can be removed, and which commented-out code should be activated.</p>
+<div class="notice"><strong>Key idea:</strong> A Python comment begins with <code>#</code>. Python ignores everything after the <code>#</code> on that line. Comments should help explain code when needed, but readable code and meaningful variable names can often explain themselves.</div>
+</section>
+
+<section class="card">
+<h2>Task 1 — Create the Starter Program</h2>
+<p>Create <code>Lab8.py</code> and manually type the starter program shown below. <strong>Do not change anything yet.</strong> The purpose of this first step is to see which lines Python runs and which lines it ignores.</p>
+<div class="code no-copy"># this program computes the number of seconds in a given number of hours
+# this program has been written two days ago
+
+a = 2  # number of hours
+seconds = 3600  # number of seconds in 1 hour
+
+print("Hours: ", a)  # printing the number of hours
+# print("Seconds in Hours: ", a * seconds)  # printing the number of seconds in a given number of hours
+
+# here we should also print "Goodbye", but a programmer didn't have time to write any code
+# this is the end of the program that computes the number of seconds in 3 hour</div>
+<p><strong>What to notice:</strong> Lines beginning with <code>#</code> are comments, so Python skips them. The line that prints the seconds also begins with <code>#</code>, so it will <strong>not</strong> run yet.</p><p>Run the program once before making changes. At this point, you should see the hours printed, but you should <strong>not</strong> see the seconds or the word <code>Goodbye</code>.</p>
+<div class="upload"><label>Task 1 Screenshot — Starter code and output</label><input type="file" accept="image/*" data-shot="shot1"><img class="preview" data-preview="shot1"></div>
+</section>
+
+<section class="card">
+<h2>Task 2 — Identify Useful and Unnecessary Comments</h2>
+<p>Now examine the comments in the starter program. A good comment should provide useful information. Some comments in this program are unnecessary, outdated, or incorrect on purpose.</p><p><strong>Your job:</strong> read each comment and ask, “Does this comment help me understand the program?” If the answer is no, remove it or improve it.</p>
+<p>For example, <code># this program has been written two days ago</code> does not help explain how the program works, so it can be removed. Also notice that the final comment says <code>3 hour</code> even though the variable currently contains <code>2</code>. That comment is outdated and should not be trusted just because it is written in the program.</p>
+<div class="notice"><strong>Remember:</strong> Good comments explain <em>why</em> something is being done or provide useful context. Comments do not need to repeat exactly what a clear line of code already says.</div>
+<div class="upload"><label>Task 2 Screenshot — Improved comments</label><input type="file" accept="image/*" data-shot="shot2"><img class="preview" data-preview="shot2"></div>
+</section>
+
+<section class="card">
+<h2>Task 3 — Enable Commented-Out Code</h2>
+<p>Comments can also be used temporarily to prevent a line of code from running. Find the line below. Because it starts with <code>#</code>, Python ignores the entire line even though it contains a valid <code>print()</code> statement.</p>
+<div class="code no-copy"># print("Seconds in Hours: ", a * seconds)</div>
+<p><strong>Remove only the first <code>#</code></strong> so the line becomes active Python code. Do not delete the <code>print()</code> statement. Run the program again.</p><p>The expression <code>a * seconds</code> means <strong>2 × 3600</strong>. Python calculates the result and prints <strong>7200</strong>. This demonstrates the difference between a commented-out line and an active line of code.</p>
+<div class="code expected">With a = 2 and seconds = 3600, the calculation should produce:
+7200</div>
+<div class="upload"><label>Task 3 Screenshot — Activated code and output</label><input type="file" accept="image/*" data-shot="shot3"><img class="preview" data-preview="shot3"></div>
+</section>
+
+<section class="card">
+<h2>Task 4 — Improve Variable Names</h2>
+<p>The variable <code>a</code> stores the number of hours, but the name <code>a</code> does not tell the reader what the value represents. Clear variable names can make code understandable without needing extra comments.</p><p>Rename <code>a</code> to <code>hours</code>. This is called using a <strong>descriptive variable name</strong>.</p>
+<div class="code no-copy">hours = 2
+seconds = 3600</div>
+<p><strong>Important:</strong> After changing <code>a</code> to <code>hours</code>, change it everywhere it is used, including both <code>print()</code> statements. If one old <code>a</code> remains, the program may produce an error. Run the program and confirm that the results are still 2 hours and 7200 seconds.</p>
+<div class="upload"><label>Task 4 Screenshot — Readable variable names</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div>
+</section>
+
+<section class="card">
+<h2>Task 5 — Add the Missing Goodbye Message</h2>
+<p>One comment describes something the programmer wanted the program to do: print the word <code>Goodbye</code>. A comment only describes an idea; it does <strong>not</strong> make Python perform that action.</p><p>Replace the comment about printing Goodbye with a real Python <code>print()</code> statement.</p>
+<div class="code no-copy">print("Goodbye")</div>
+<p>Run the program again. Because <code>print("Goodbye")</code> is real code and does not begin with <code>#</code>, Python should now display <code>Goodbye</code> at the end.</p>
+<div class="upload"><label>Task 5 Screenshot — Goodbye message and output</label><input type="file" accept="image/*" data-shot="shot5"><img class="preview" data-preview="shot5"></div>
+</section>
+
+<section class="card">
+<h2>Task 6 — Review and Clean Up the Program</h2>
+<p>For the final step, clean up the entire program. The goal is <strong>not to remove every comment</strong>. The goal is to keep comments only when they add useful information and let clear Python code explain the rest.</p>
+<p>Make sure you use <code>hours</code> instead of <code>a</code>, the seconds line is active, the Goodbye statement is real code, and outdated comments are removed or corrected.</p><div class="notice"><strong>Your final output should include:</strong><br>Hours: 2<br>Seconds in Hours: 7200<br>Goodbye</div>
+<div class="upload"><label>Task 6 Screenshot — Final cleaned program and output</label><input type="file" accept="image/*" data-shot="shot6"><img class="preview" data-preview="shot6"></div>
+</section>
+
+<section class="card">
+<h2>Reflection Questions</h2>
+<div><label>1. What symbol is used to begin a comment in Python?</label><textarea id="r1"></textarea></div><br>
+<div><label>2. Why can too many unnecessary comments make a program harder to read?</label><textarea id="r2"></textarea></div><br>
+<div><label>3. What happened when you removed the <code>#</code> from the commented-out <code>print()</code> statement?</label><textarea id="r3"></textarea></div><br>
+<div><label>4. Why is a variable name such as <code>hours</code> easier to understand than a name such as <code>a</code>?</label><textarea id="r4"></textarea></div><br>
+<div><label>5. Give one example of a comment you removed, changed, or kept, and explain your decision.</label><textarea id="r5"></textarea></div>
+</section>
+
+<div class="actions">
+<button id="saveBtn">Save Progress</button>
+<button id="pdfBtn">Generate PDF</button>
+<button class="secondary" onclick="window.print()">Print / Save as PDF</button>
+<button id="clearBtn" class="danger">Clear Saved Progress</button>
+<span id="status" class="status"></span>
+</div>
+</main>
+
+<script>
+const KEY="python_lab8_comments_v1",shots={};
+function setStatus(msg,bad=false){const e=document.getElementById("status");e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";setTimeout(()=>{if(e.textContent===msg)e.textContent=""},5000)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function collect(){const reflections={};for(let i=1;i<=5;i++)reflections["r"+i]=document.getElementById("r"+i).value;return {studentName:studentName.value,course:course.value,labDate:labDate.value,reflections,screenshots:{...shots}}}
+function saveProgress(){try{localStorage.setItem(KEY,JSON.stringify(collect()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Could not save all progress. Try smaller screenshots.",true)}}
+function loadProgress(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"ITSE 2421";labDate.value=d.labDate||"";Object.entries(d.reflections||{}).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v});Object.assign(shots,d.screenshots||{});Object.entries(shots).forEach(([k,v])=>{const i=document.querySelector(`[data-preview="${k}"]`);if(i)i.src=v})}catch(e){}}
+function compressImage(file,cb){const r=new FileReader();r.onload=()=>{const img=new Image();img.onload=()=>{const max=1400,scale=Math.min(1,max/img.width),c=document.createElement("canvas");c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext("2d").drawImage(img,0,0,c.width,c.height);cb(c.toDataURL("image/jpeg",.78))};img.src=r.result};r.readAsDataURL(file)}
+document.querySelectorAll('input[type="file"][data-shot]').forEach(inp=>inp.addEventListener("change",()=>{const f=inp.files[0];if(!f)return;const k=inp.dataset.shot;compressImage(f,d=>{shots[k]=d;document.querySelector(`[data-preview="${k}"]`).src=d;saveProgress()})}));
+document.querySelectorAll(".code.no-copy").forEach(b=>["copy","cut","contextmenu","dragstart"].forEach(evt=>b.addEventListener(evt,e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.",true)})));
+
+function buildPages(){
+ const d=collect(),pages=[];
+ function add(inner){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=inner;document.body.appendChild(p);pages.push(p)}
+ add(`<h1 style="margin:0 0 10px;font-size:26px">Lab 8 — 2.5.1.2 LAB: Comments</h1><p><strong>Student:</strong> ${esc(d.studentName||"")} &nbsp;&nbsp; <strong>Course:</strong> ${esc(d.course||"")} &nbsp;&nbsp; <strong>Date:</strong> ${esc(d.labDate||"")}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page and automatically scaled to fit.</p>`);
+ const items=[];for(let i=1;i<=6;i++)items.push({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]});
+ for(let s=0;s<items.length;s+=2){let h=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;items.slice(s,s+2).forEach(it=>{h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot uploaded.</em>"}</div></div>`});add(h)}
+ const qs=["What symbol is used to begin a comment in Python?","Why can too many unnecessary comments make a program harder to read?","What happened when you removed the # from the commented-out print() statement?","Why is a variable name such as hours easier to understand than a name such as a?","Give one example of a comment you removed, changed, or kept, and explain your decision."];
+ for(let s=0;s<qs.length;s+=3){let h=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;qs.slice(s,s+3).forEach((q,o)=>{const i=s+o+1;h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;font-size:14px;overflow-wrap:anywhere">${esc(d.reflections["r"+i]||"")}</div></div>`});add(h)}
+ return pages
+}
+pdfBtn.addEventListener("click",async()=>{pdfBtn.disabled=true;setStatus("Creating PDF...");let pages=[];try{if(!window.html2canvas||!window.jspdf)throw new Error("PDF library unavailable");pages=buildPages();await new Promise(r=>setTimeout(r,350));const {jsPDF}=window.jspdf,pdf=new jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.35,useCORS:true,backgroundColor:"#fff"});if(i>0)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",0,0,210,297)}const safe=(studentName.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");pdf.save(safe+"_Lab8_Comments.pdf");setStatus("PDF generated.")}catch(e){console.error(e);setStatus("Automatic PDF unavailable. Opening print dialog...",true);setTimeout(()=>window.print(),500)}finally{pages.forEach(p=>p.remove());pdfBtn.disabled=false}});
+saveBtn.addEventListener("click",saveProgress);clearBtn.addEventListener("click",()=>{if(confirm("Clear all saved Lab 8 progress?")){localStorage.removeItem(KEY);location.reload()}});
+window.addEventListener("DOMContentLoaded",()=>{loadProgress();if(!labDate.value)labDate.value=new Date().toISOString().slice(0,10)});
+</script>
+</body></html>
