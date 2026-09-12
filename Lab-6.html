@@ -83,7 +83,6 @@ print(kilometers, "kilometers is", round(kilometers_to_miles, 2), "miles")</div>
 <p>Also observe how <code>round()</code> is placed directly inside <code>print()</code>:</p>
 <div class="code no-copy">round(miles_to_kilometers, 2)</div>
 <p>The first argument is the value being rounded. The second argument tells Python how many decimal places to keep.</p>
-<div class="upload"><label>Task 4 Screenshot</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div>
 </section>
 
 <section class="card">
@@ -135,7 +134,7 @@ function buildPages(){
  const d=collect(),pages=[];
  function add(inner){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=inner;document.body.appendChild(p);pages.push(p)}
  add(`<h1 style="margin:0 0 10px;font-size:26px">Lab 6 — 2.4.1.9 LAB: Variables: a simple converter</h1><p><strong>Student:</strong> ${esc(d.studentName||"")} &nbsp;&nbsp; <strong>Course:</strong> ${esc(d.course||"")} &nbsp;&nbsp; <strong>Date:</strong> ${esc(d.labDate||"")}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page and automatically scaled to fit.</p>`);
- const items=[];for(let i=1;i<=5;i++)items.push({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]});
+ const items=[1,2,3,5].map(i=>({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]}));
  for(let s=0;s<items.length;s+=2){let h=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;items.slice(s,s+2).forEach(it=>{h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot uploaded.</em>"}</div></div>`});add(h)}
  const qs=["Why is a variable useful when building a unit converter?","Why do you multiply by 1.61 when converting miles to kilometers?","Why do you divide by 1.61 when converting kilometers to miles?","What does round(value, 2) do?","What happened when you used round() without specifying the number of decimal places?"];
  for(let s=0;s<qs.length;s+=3){let h=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;qs.slice(s,s+3).forEach((q,o)=>{const i=s+o+1;h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;font-size:14px;overflow-wrap:anywhere">${esc(d.reflections["r"+i]||"")}</div></div>`});add(h)}
