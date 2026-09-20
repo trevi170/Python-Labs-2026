@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Extra Credit Project - Student Utility Console</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#5b6475;--accent:#2563eb;--accent2:#7c3aed;--border:#dbe3ef;--code:#111827;--ok:#eaf8ef;--warn:#fff7df}
+*{box-sizing:border-box}
+body{-webkit-user-select:none;user-select:none}
+input,textarea{-webkit-user-select:text;user-select:text} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+header{background:linear-gradient(135deg,var(--accent),var(--accent2));color:white;padding:42px 20px}
+.wrap{max-width:980px;margin:auto}.badge{display:inline-block;background:rgba(255,255,255,.18);padding:6px 12px;border-radius:999px;font-weight:bold}
+h1{margin:12px 0 4px;font-size:2.2rem} header p{margin:0;opacity:.95}
+main{max-width:980px;margin:24px auto;padding:0 18px 50px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin:18px 0;box-shadow:0 5px 18px rgba(20,35,70,.06)}
+h2{margin-top:0;color:#1e40af} h3{color:#4338ca}.objective{background:#eef4ff;border-left:5px solid var(--accent)}
+.note{background:var(--ok);border-left:5px solid #22a35a;padding:14px 16px;border-radius:8px;margin:14px 0}.warning{background:var(--warn);border-left:5px solid #e5a000;padding:14px 16px;border-radius:8px;margin:14px 0}
+code{font-family:Menlo,Consolas,monospace}.inline{background:#edf1f7;padding:2px 6px;border-radius:5px}
+pre{background:var(--code);color:#f8fafc;padding:18px;border-radius:12px;overflow:auto;white-space:pre-wrap}
+.task{border-top:1px solid var(--border);padding-top:16px;margin-top:18px}
+label{display:block;font-weight:bold;margin:12px 0 6px} textarea,input[type=text]{width:100%;padding:11px;border:1px solid #bfc9d8;border-radius:8px;font:inherit}
+.upload{padding:13px;background:#f7f9fc;border:1px dashed #9aa8bd;border-radius:10px;margin-top:12px}.preview{max-width:100%;max-height:520px;margin-top:12px;border:1px solid #cfd7e3;border-radius:10px;display:none}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid #cfd7e3;padding:9px;text-align:left}th{background:#eef2f7}
+.checklist label{font-weight:normal}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}button{border:0;border-radius:9px;padding:12px 17px;font-weight:bold;cursor:pointer;background:#2563eb;color:#fff}.secondary{background:#475569}
+.small{color:var(--muted);font-size:.93rem}footer{text-align:center;color:var(--muted);padding:25px}
+@media print{header{background:white!important;color:black;padding:10px 0}body{background:white}.card{box-shadow:none;break-inside:avoid}.actions{display:none}main{margin:0;max-width:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><span class="badge">Week 5 • Extra Credit</span><h1>Student Utility Console</h1><p>Python practice using GitHub Codespaces</p></div></header>
+<main>
+<section class="card objective">
+<h2>Objective</h2>
+<p>Build a small Python program that collects information from a user, converts numeric input, performs a percentage calculation, uses string replication, and prints a clean student summary.</p>
+<p><strong>Editor of choice:</strong> GitHub Codespaces. You will write and run your program entirely in the browser.</p>
+</section>
+
+<section class="card">
+<h2>Before You Begin</h2>
+<label>Student Name</label><input id="studentName" type="text" placeholder="Enter your full name">
+<div class="note"><strong>What you will practice:</strong> <code class="inline">print()</code>, variables, <code class="inline">input()</code>, <code class="inline">float()</code>, <code class="inline">int()</code>, arithmetic operators, string replication, concatenation, and <code class="inline">str()</code>.</div>
+</section>
+
+<section class="card">
+<h2>Step 1 — Open GitHub Codespaces</h2>
+<ol>
+<li>Sign in to GitHub.</li><li>Open the Codespace provided for your course, or create a Codespace from the repository your instructor provides.</li>
+<li>Wait for the Codespaces editor to finish loading.</li><li>In the Explorer panel, create a new file named <code class="inline">extra_credit.py</code>.</li>
+<li>Open the new file in the editor.</li>
+</ol>
+<h3>Check Python</h3><p>Open the terminal in Codespaces and type:</p><pre>python3 --version</pre>
+<div class="note">If a Python version appears, you are ready to continue.</div>
+</section>
+
+<section class="card">
+<h2>Step 2 — Add a Title</h2><p>At the top of <code class="inline">extra_credit.py</code>, type:</p>
+<pre>print("Extra Credit Project")
+print("====================")</pre>
+<p class="small">This gives your program a clear title when it runs.</p>
+</section>
+
+<section class="card">
+<h2>Step 3 — Collect User Input</h2>
+<p>Use <code class="inline">input()</code> to ask the user for information. Enter:</p>
+<pre>student_name = input("Enter student name: ")
+course_name = input("Enter course name: ")
+assignment_name = input("Enter assignment name: ")
+
+score_earned = float(input("Enter score earned: "))
+score_total = float(input("Enter maximum possible score: "))
+
+repeat_count = int(input("How many times should the separator repeat? "))</pre>
+<div class="note"><strong>Why convert the numbers?</strong> <code class="inline">input()</code> returns text. <code class="inline">float()</code> converts scores to numbers that can include decimals, while <code class="inline">int()</code> converts the separator count to a whole number.</div>
+</section>
+
+<section class="card">
+<h2>Step 4 — Create a Separator</h2>
+<p>String replication lets Python repeat text using the <code class="inline">*</code> operator.</p>
+<pre>line = "=" * repeat_count</pre>
+<p>If <code class="inline">repeat_count</code> is 10, Python creates:</p><pre>==========</pre>
+</section>
+
+<section class="card">
+<h2>Step 5 — Calculate the Percentage</h2>
+<pre>percentage = (score_earned / score_total) * 100</pre>
+<div class="note"><strong>Operator review:</strong> <code class="inline">/</code> divides the score earned by the total possible score. <code class="inline">*</code> multiplies that result by 100 to convert it to a percentage.</div>
+</section>
+
+<section class="card">
+<h2>Step 6 — Print the Results</h2>
+<p>Use concatenation with <code class="inline">+</code> and <code class="inline">str()</code> to display the results.</p>
+<pre>print(line)
+print("Student Summary")
+print(line)
+
+print("Name: " + student_name)
+print("Course: " + course_name)
+print("Assignment: " + assignment_name)
+
+print("Score: " + str(score_earned) + " out of " + str(score_total))
+print("Percentage: " + str(percentage) + " %")
+
+print(line)
+print("Great job, " + student_name + "!")
+print(line)</pre>
+<div class="note"><code class="inline">str()</code> converts a number back to text so it can be joined to other text with <code class="inline">+</code>.</div>
+</section>
+
+<section class="card">
+<h2>Step 7 — Run Your Program</h2>
+<p><strong>Run your program to complete the following steps.</strong></p>
+<ol>
+<li>Run your completed <code class="inline">extra_credit.py</code> program.</li>
+<li>Enter the information shown in each test case in Step 8.</li>
+<li>Compare your program's output with the expected results.</li>
+<li>If the results do not match, review your code, make corrections, and run the program again.</li>
+<li>Once each test case works correctly, attach a screenshot of the results in the appropriate Test Case section.</li>
+</ol>
+<div class="note"><strong>Important:</strong> You will run the program multiple times. Complete all four test cases in Step 8 and provide a screenshot for each one.</div>
+</section>
+
+<section class="card">
+<h2>Step 8 — Test Your Program</h2>
+<p>Run your program with different values. Your formatting may be slightly different, but the important values should match.</p>
+<h3>Test Case 1</h3>
+<table><tr><th>Prompt</th><th>Value</th></tr><tr><td>Student name</td><td>Maria Lopez</td></tr><tr><td>Course name</td><td>Python Essentials</td></tr><tr><td>Assignment name</td><td>Module 2 Week 5</td></tr><tr><td>Score earned</td><td>85</td></tr><tr><td>Maximum score</td><td>100</td></tr><tr><td>Separator repeat count</td><td>30</td></tr></table>
+<p><strong>Check:</strong> score = 85.0 out of 100.0; percentage = 85.0%; greeting = “Great job, Maria Lopez!”; separator = 30 <code class="inline">=</code> characters.</p>
+<h4>Expected Output Example</h4>
+<p class="small">Your output should look similar to this. The exact spacing may be slightly different.</p>
+<pre>==============================
+Student Summary
+==============================
+Name: Maria Lopez
+Course: Python Essentials
+Assignment: Module 2 Week 5
+Score: 85.0 out of 100.0
+Percentage: 85.0 %
+==============================
+Great job, Maria Lopez!
+==============================</pre>
+<div class="upload">
+<label>Test Case 1 Screenshot</label>
+<p class="small">Run Test Case 1 in Codespaces, then attach a screenshot showing the terminal output.</p>
+<input type="file" accept="image/*" onchange="attachTestScreenshot(event,'testPreview1')">
+<img id="testPreview1" class="preview" alt="Test Case 1 screenshot preview">
+</div>
+<h3>Test Case 2</h3>
+<table><tr><th>Prompt</th><th>Value</th></tr><tr><td>Student name</td><td>Hector</td></tr><tr><td>Course name</td><td>Intro to Python</td></tr><tr><td>Assignment name</td><td>Extra Credit</td></tr><tr><td>Score earned</td><td>47.5</td></tr><tr><td>Maximum score</td><td>50</td></tr><tr><td>Separator repeat count</td><td>20</td></tr></table>
+<p><strong>Check:</strong> percentage should be 95.0%.</p>
+<h4>Expected Output Example</h4>
+<p class="small">Your output should look similar to this. The exact spacing may be slightly different.</p>
+<pre>====================
+Student Summary
+====================
+Name: Hector
+Course: Intro to Python
+Assignment: Extra Credit
+Score: 47.5 out of 50.0
+Percentage: 95.0 %
+====================
+Great job, Hector!
+====================</pre>
+<div class="upload">
+<label>Test Case 2 Screenshot</label>
+<p class="small">Run Test Case 2 in Codespaces, then attach a screenshot showing the terminal output.</p>
+<input type="file" accept="image/*" onchange="attachTestScreenshot(event,'testPreview2')">
+<img id="testPreview2" class="preview" alt="Test Case 2 screenshot preview">
+</div>
+
+<h3>Test Case 3</h3>
+<table>
+<tr><th>Prompt</th><th>Value</th></tr>
+<tr><td>Student name</td><td>Ana</td></tr>
+<tr><td>Course name</td><td>Data Basics</td></tr>
+<tr><td>Assignment name</td><td>Lab 3</td></tr>
+<tr><td>Score earned</td><td>920</td></tr>
+<tr><td>Maximum score</td><td>1000</td></tr>
+<tr><td>Separator repeat count</td><td>40</td></tr>
+</table>
+<p><strong>Check:</strong> score = 920.0 out of 1000.0; percentage = 92.0%; greeting = “Great job, Ana!”; separator = 40 <code class="inline">=</code> characters.</p>
+<h4>Expected Output Example</h4>
+<p class="small">Your output should look similar to this. The exact spacing may be slightly different.</p>
+<pre>========================================
+Student Summary
+========================================
+Name: Ana
+Course: Data Basics
+Assignment: Lab 3
+Score: 920.0 out of 1000.0
+Percentage: 92.0 %
+========================================
+Great job, Ana!
+========================================</pre>
+<div class="upload">
+<label>Test Case 3 Screenshot</label>
+<p class="small">Run Test Case 3 in Codespaces, then attach a screenshot showing the terminal output.</p>
+<input type="file" accept="image/*" onchange="attachTestScreenshot(event,'testPreview3')">
+<img id="testPreview3" class="preview" alt="Test Case 3 screenshot preview">
+</div>
+
+<h3>Test Case 4</h3>
+<table>
+<tr><th>Prompt</th><th>Value</th></tr>
+<tr><td>Student name</td><td>Jordan</td></tr>
+<tr><td>Course name</td><td>Python 101</td></tr>
+<tr><td>Assignment name</td><td>Checkpoint</td></tr>
+<tr><td>Score earned</td><td>0</td></tr>
+<tr><td>Maximum score</td><td>10</td></tr>
+<tr><td>Separator repeat count</td><td>10</td></tr>
+</table>
+<p><strong>Check:</strong> score = 0.0 out of 10.0; percentage = 0.0%; greeting = “Great job, Jordan!”; separator = 10 <code class="inline">=</code> characters.</p>
+<h4>Expected Output Example</h4>
+<p class="small">Your output should look similar to this. The exact spacing may be slightly different.</p>
+<pre>==========
+Student Summary
+==========
+Name: Jordan
+Course: Python 101
+Assignment: Checkpoint
+Score: 0.0 out of 10.0
+Percentage: 0.0 %
+==========
+Great job, Jordan!
+==========</pre>
+<div class="upload">
+<label>Test Case 4 Screenshot</label>
+<p class="small">Run Test Case 4 in Codespaces, then attach a screenshot showing the terminal output.</p>
+<input type="file" accept="image/*" onchange="attachTestScreenshot(event,'testPreview4')">
+<img id="testPreview4" class="preview" alt="Test Case 4 screenshot preview">
+</div>
+
+<div class="warning"><strong>Note:</strong> Rounding is not required for this extra-credit project. A percentage containing additional decimal places is acceptable.</div>
+</section>
+
+<section class="card">
+<h2>Reflection</h2>
+<div class="task"><label>1. Why do we use <code class="inline">float()</code> around the score input?</label><textarea rows="3"></textarea></div>
+<div class="task"><label>2. What does <code class="inline">"=" * repeat_count</code> do?</label><textarea rows="3"></textarea></div>
+<div class="task"><label>3. Explain how the program calculates the percentage.</label><textarea rows="3"></textarea></div>
+</section>
+
+<section class="card">
+<h2>Submission Checklist</h2>
+<div class="checklist">
+<label><input type="checkbox"> My file is named <code class="inline">extra_credit.py</code>.</label><br>
+<label><input type="checkbox"> My program runs in GitHub Codespaces without errors.</label><br>
+<label><input type="checkbox"> I tested my program with the provided values.</label><br>
+<label><input type="checkbox"> My output shows the name, course, assignment, score, percentage, greeting, and separator.</label><br>
+<label><input type="checkbox"> I completed the reflection questions.</label>
+</div>
+<div class="actions"><button onclick="generatePDF()">Generate PDF</button><button class="secondary" onclick="clearWork()">Clear Responses</button></div>
+</section>
+</main>
+<footer>Week 5 Extra Credit Project • Python • GitHub Codespaces</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+function attachScreenshot(event){
+ const file = event.target.files && event.target.files[0];
+ if(!file) return;
+ if(!file.type.startsWith("image/")){
+   alert("Please select an image file.");
+   event.target.value = "";
+   return;
+ }
+ const reader = new FileReader();
+ reader.onload = function(e){
+   const data = e.target.result;
+   const preview = document.getElementById("screenshotPreview");
+   preview.src = data;
+   preview.style.display = "block";
+   document.getElementById("screenshotData").value = data;
+ };
+ reader.readAsDataURL(file);
+}
+
+
+function attachTestScreenshot(event, previewId){
+ const file = event.target.files && event.target.files[0];
+ if(!file) return;
+ if(!file.type.startsWith("image/")){
+   alert("Please select an image file.");
+   event.target.value = "";
+   return;
+ }
+ const reader = new FileReader();
+ reader.onload = function(e){
+   const preview = document.getElementById(previewId);
+   preview.src = e.target.result;
+   preview.style.display = "block";
+ };
+ reader.readAsDataURL(file);
+}
+
+function generatePDF(){
+ const name = (document.getElementById("studentName").value || "Student").trim();
+ const safeName = name.replace(/[^a-z0-9_-]+/gi, "_");
+ const actions = document.querySelector(".actions");
+ const fileInputs = Array.from(document.querySelectorAll('input[type="file"]'));
+ if(actions) actions.style.display = "none";
+ fileInputs.forEach(el => el.style.display = "none");
+
+ const element = document.body;
+ const options = {
+   margin: [0.25, 0.25, 0.25, 0.25],
+   filename: safeName + "_Week5_Extra_Credit.pdf",
+   image: { type: "jpeg", quality: 0.98 },
+   html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+   jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+   pagebreak: { mode: ["css", "legacy"], avoid: [".card", ".upload", "pre", "table"] }
+ };
+
+ if(typeof html2pdf === "undefined"){
+   alert("The PDF generator could not load. Make sure you are connected to the internet, then refresh the page and try again.");
+   if(actions) actions.style.display = "";
+   fileInputs.forEach(el => el.style.display = "");
+   return;
+ }
+
+ html2pdf().set(options).from(element).save().then(function(){
+   if(actions) actions.style.display = "";
+   fileInputs.forEach(el => el.style.display = "");
+ });
+}
+
+function clearWork(){
+ if(!confirm("Clear the name, reflection responses, checklist, and screenshot?")) return;
+ document.querySelectorAll('input[type="text"], textarea').forEach(e=>e.value='');
+ document.querySelectorAll('input[type="checkbox"]').forEach(e=>e.checked=false);
+ document.querySelectorAll('input[type="file"]').forEach(e=>e.value='');
+ document.querySelectorAll('.preview').forEach(p=>{p.removeAttribute("src");p.style.display="none";});
+ const d=document.getElementById("screenshotData");
+ if(d)d.value="";
+}
+</script>
+
+<script>
+/* Classroom copy/paste deterrent. This discourages casual copying but
+   cannot make browser-delivered HTML completely copy-proof. */
+document.addEventListener("copy", function(e){
+  if (!e.target.matches("input, textarea")) {
+    e.preventDefault();
+    alert("Copying the lab instructions and code examples is disabled. Please type the code yourself for practice.");
+  }
+});
+document.addEventListener("cut", function(e){
+  if (!e.target.matches("input, textarea")) e.preventDefault();
+});
+document.addEventListener("paste", function(e){
+  /* Allow students to type answers, but prevent pasted answers/code. */
+  e.preventDefault();
+  alert("Pasting is disabled for this lab. Please type your work.");
+});
+document.addEventListener("contextmenu", function(e){
+  if (!e.target.matches("input, textarea, input[type=file]")) e.preventDefault();
+});
+document.addEventListener("dragstart", function(e){ e.preventDefault(); });
+document.addEventListener("keydown", function(e){
+  const k = e.key.toLowerCase();
+  if ((e.ctrlKey || e.metaKey) && ["c","v","x","a","s","u"].includes(k)) {
+    if (e.target.matches("input, textarea") && ["a","c","x"].includes(k)) return;
+    e.preventDefault();
+  }
+});
+</script>
+
+</body></html>
