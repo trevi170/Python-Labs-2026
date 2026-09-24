@@ -47,7 +47,7 @@ button{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:point
 <li>Use <code>if</code> and <code>else</code> to choose between two tax calculations.</li>
 <li>Use comparison and arithmetic operators in a practical calculation.</li>
 <li>Prevent a calculated tax from becoming negative.</li>
-<li>Use <code>round()</code> to round a floating-point result to the nearest whole thaler.</li>
+<li>Use <code>round()</code> to round a floating-point result to the nearest whole dollar.</li>
 </ul>
 </section>
 
@@ -67,12 +67,12 @@ button{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:point
 <h2>Lab Scenario</h2>
 <p>You are creating a Personal Income Tax (PIT) calculator for a fictional land of milk and honey. The tax depends on the person's annual income.</p>
 <div class="notice">
-<strong>If income is not higher than 85,528 thalers:</strong><br>
-Tax = 18% of the income minus 556.02 thalers.<br><br>
-<strong>If income exceeds 85,528 thalers:</strong><br>
-Tax = 14,839.02 thalers plus 32% of the amount above 85,528.
+<strong>If income is not higher than 85,528 dollars:</strong><br>
+Tax = 18% of the income minus 556.02 dollars.<br><br>
+<strong>If income exceeds 85,528 dollars:</strong><br>
+Tax = 14,839.02 dollars plus 32% of the amount above 85,528.
 </div>
-<p>The program must also make sure the tax is never negative and must round the final tax to the nearest whole thaler.</p>
+<p>The program must also make sure the tax is never negative and must round the final tax to the nearest whole dollar.</p>
 </section>
 
 <section class="card">
@@ -107,8 +107,8 @@ else:
 <h2>Task 4 — Round and Print the Tax</h2>
 <p>Round the tax to zero decimal places and then display the result.</p>
 <div class="code no-copy">tax = round(tax, 0)
-print("The tax is:", tax, "thalers")</div>
-<p>For example, a calculated tax containing cents is rounded to the nearest whole thaler before it is printed.</p>
+print("The tax is:", tax, "dollars")</div>
+<p>For example, a calculated tax containing cents is rounded to the nearest whole dollar before it is printed.</p>
 <div class="upload"><label>Task 4 Screenshot — Completed program and output</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div>
 </section>
 
@@ -117,11 +117,11 @@ print("The tax is:", tax, "thalers")</div>
 <p>Run the completed program using each income below. Compare your output with the expected tax.</p>
 <div class="notice">
 <strong>Test Data</strong><br><br>
-<code>100000.0</code> → <strong>The tax is: 19470.0 thalers</strong><br><br>
-<code>50000.0</code> → <strong>The tax is: 8444.0 thalers</strong><br><br>
-<code>85528.0</code> → <strong>The tax is: 14839.0 thalers</strong><br><br>
-<code>0.0</code> → <strong>The tax is: 0.0 thalers</strong><br><br>
-<code>123456.0</code> → <strong>The tax is: 32370.0 thalers</strong>
+<code>100000.0</code> → <strong>The tax is: 19470.0 dollars</strong><br><br>
+<code>50000.0</code> → <strong>The tax is: 8444.0 dollars</strong><br><br>
+<code>85528.0</code> → <strong>The tax is: 14839.0 dollars</strong><br><br>
+<code>0.0</code> → <strong>The tax is: 0.0 dollars</strong><br><br>
+<code>200000.0</code> → <strong>The tax is: 51470.0 dollars</strong>
 </div>
 <div class="upload"><label>Task 5 Screenshot — Test results</label><input type="file" accept="image/*" data-shot="shot5"><img class="preview" data-preview="shot5"></div>
 </section>
