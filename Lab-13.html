@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 13 — Comparison operators and conditional execution</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--bg:#07111f;--panel:#0e1b2d;--text:#eaf2ff;--muted:#b9c8dc;--accent:#48d7ff;--border:#28415e;--good:#70e6a0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#06101d,#0b1b30);color:var(--text);font-family:Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1050px;margin:auto;padding:28px 18px 70px}.hero,.card{background:rgba(14,27,45,.96);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+h1{margin:0 0 8px;font-size:31px}h2{margin-top:0}.muted{color:var(--muted)}.tag{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:4px 9px;border-radius:999px;font-size:13px}
+.notice{border-left:4px solid var(--accent);padding:12px 14px;background:#0a2033;border-radius:8px}.warning{border-left-color:#ffcc66;background:#33280a}.code{background:#020811;border:1px solid #20384f;border-radius:10px;padding:15px;white-space:pre-wrap;font:15px/1.55 Menlo,Consolas,monospace;color:#d9f6ff}
+.code.no-copy{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;cursor:default}.expected{background:#08150e;border-color:#244c33}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:700;display:block;margin-bottom:6px}
+input[type=text],input[type=date],textarea{width:100%;padding:11px;border-radius:8px;border:1px solid #45617e;background:#071321;color:#fff;font:inherit}
+textarea{min-height:115px;resize:vertical}.upload{border:1px dashed #54708e;border-radius:10px;padding:14px;margin-top:14px}.preview{max-width:100%;max-height:360px;display:block;margin-top:10px;border-radius:8px}
+button{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer;margin:5px;background:var(--accent);color:#04101b}.secondary{background:#29435f;color:#fff}.danger{background:#7b2f3c;color:#fff}
+.actions{position:sticky;bottom:10px;background:rgba(5,13,24,.94);border:1px solid var(--border);padding:10px;border-radius:12px;z-index:4}.status{margin-left:8px;color:var(--good)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:25px}}
+@media print{body{background:#fff;color:#111}.actions{display:none}.hero,.card{box-shadow:none;background:#fff;color:#111;border:1px solid #ccc}.code{color:#111;background:#f6f6f6}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<span class="badge">Interactive Python Lab</span>
+<h1>Lab 13 — Comparison operators and conditional execution</h1>
+<p class="muted">Practice using string comparisons and <code>if</code>, <code>elif</code>, and <code>else</code> to make a Python program respond differently to user input.</p>
+</section>
+
+<section class="card">
+<h2>Before You Begin</h2>
+<div class="grid">
+<div><label>Student Name</label><input id="studentName" type="text"></div>
+<div><label>Course</label><input id="course" type="text" value="ITSE 2421"></div>
+<div><label>Date</label><input id="labDate" type="date"></div>
+</div>
+<p><strong>Python filename:</strong> <code>Lab13.py</code></p>
+<div class="notice"><strong>Development environment:</strong> You may use your favorite Python IDE or code editor. <strong>GitHub Codespaces is recommended</strong>.</div>
+<p><strong>Important:</strong> Type the Python code manually. Copying from the code reference boxes is disabled.</p>
+</section>
+
+<section class="card">
+<h2>Objectives</h2>
+<ul>
+<li>Use <code>input()</code> to capture text entered by the user.</li>
+<li>Use the comparison operator <code>==</code> to compare strings.</li>
+<li>Use <code>if</code>, <code>elif</code>, and <code>else</code> to control which code executes.</li>
+<li>Recognize that Python string comparisons are case-sensitive.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Quick Guide — Conditional Execution</h2>
+<p>A conditional lets your program make a decision. Python checks a condition and runs a particular block of code depending on whether that condition is <code>True</code> or <code>False</code>.</p>
+<div class="notice">
+<strong><code>if</code></strong> — checks the first condition.<br>
+<strong><code>elif</code></strong> — checks another condition if the previous condition was False.<br>
+<strong><code>else</code></strong> — runs when none of the previous conditions were True.<br>
+<strong><code>==</code></strong> — asks whether two values are equal.
+</div>
+<p><strong>Important:</strong> Python strings are case-sensitive. <code>"Spathiphyllum"</code>, <code>"spathiphyllum"</code>, and <code>"SPATHIPHYLLUM"</code> are three different strings.</p>
+</section>
+
+<section class="card">
+<h2>Lab Scenario</h2>
+<p><strong>Spathiphyllum</strong>, commonly known as a peace lily, is a popular indoor plant. In this activity, your program is a big fan of Spathiphyllum and will respond differently depending on exactly what the user types.</p>
+<div class="notice">
+If the user enters <strong>Spathiphyllum</strong> → print <strong>Yes - Spathiphyllum is the best plant ever!</strong><br><br>
+If the user enters <strong>spathiphyllum</strong> → print <strong>No, I want a big Spathiphyllum!</strong><br><br>
+For anything else → print <strong>Spathiphyllum! Not [input]!</strong>
+</div>
+</section>
+
+<section class="card">
+<h2>Task 1 — Capture User Input</h2>
+<p>Create <code>Lab13.py</code>. Use <code>input()</code> to ask the user for a flower name and store the response in a variable named <code>name</code>.</p>
+<div class="code no-copy">name = input("Enter flower name: ")</div>
+<p><strong>Why isn't <code>int()</code> or <code>float()</code> needed?</strong> The program is working with words, and <code>input()</code> already returns a string.</p>
+<div class="upload"><label>Task 1 Screenshot — Input statement</label><input type="file" accept="image/*" data-shot="shot1"><img class="preview" data-preview="shot1"></div>
+</section>
+
+<section class="card">
+<h2>Task 2 — Check for Exact "Spathiphyllum"</h2>
+<p>Start the decision structure with an <code>if</code> statement. The <code>==</code> operator compares the user's input with the exact string <code>"Spathiphyllum"</code>.</p>
+<div class="code no-copy">if name == "Spathiphyllum":
+    print("Yes - Spathiphyllum is the best plant ever!")</div>
+<p>Notice the colon (<code>:</code>) after the condition and the indentation before <code>print()</code>. The indented line belongs to the <code>if</code> block.</p>
+<div class="upload"><label>Task 2 Screenshot — First condition</label><input type="file" accept="image/*" data-shot="shot2"><img class="preview" data-preview="shot2"></div>
+</section>
+
+<section class="card">
+<h2>Task 3 — Add the <code>elif</code> Condition</h2>
+<p>If the first condition is False, Python should check whether the user entered the lowercase version <code>"spathiphyllum"</code>.</p>
+<div class="code no-copy">elif name == "spathiphyllum":
+    print("No, I want a big Spathiphyllum!")</div>
+<p><code>elif</code> means “else if.” Python reaches this condition only when the first <code>if</code> condition was False.</p>
+<div class="upload"><label>Task 3 Screenshot — if and elif conditions</label><input type="file" accept="image/*" data-shot="shot3"><img class="preview" data-preview="shot3"></div>
+</section>
+
+<section class="card">
+<h2>Task 4 — Handle Every Other Input</h2>
+<p>Add an <code>else</code> block. It does not need another condition because it handles anything that did not match the first two choices.</p>
+<div class="code no-copy">else:
+    print("Spathiphyllum! Not", name + "!")</div>
+<p>The variable <code>name</code> allows the program to include the user's actual input in the message.</p>
+<div class="upload"><label>Task 4 Screenshot — Completed conditional structure</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div>
+</section>
+
+<section class="card">
+<h2>Task 5 — Test the Program</h2>
+<p>Run your program four times. Enter each sample exactly as shown. Pay close attention to uppercase and lowercase letters.</p>
+<div class="notice">
+<strong>Test Data</strong><br><br>
+<code>spathiphyllum</code> → <strong>No, I want a big Spathiphyllum!</strong><br><br>
+<code>pelargonium</code> → <strong>Spathiphyllum! Not pelargonium!</strong><br><br>
+<code>Spathiphyllum</code> → <strong>Yes - Spathiphyllum is the best plant ever!</strong><br><br>
+<code>SPATHIPHYLLUM</code> → <strong>Spathiphyllum! Not SPATHIPHYLLUM!</strong>
+</div>
+<div class="upload"><label>Task 5 Screenshot — Test results</label><input type="file" accept="image/*" data-shot="shot5"><img class="preview" data-preview="shot5"></div>
+</section>
+
+<section class="card">
+<h2>Reflection Questions</h2>
+<div><label>1. What does the <code>==</code> operator do?</label><textarea id="r1"></textarea></div><br>
+<div><label>2. What is the difference between <code>if</code>, <code>elif</code>, and <code>else</code>?</label><textarea id="r2"></textarea></div><br>
+<div><label>3. Why are <code>"Spathiphyllum"</code> and <code>"spathiphyllum"</code> treated differently?</label><textarea id="r3"></textarea></div><br>
+<div><label>4. Why does <code>"SPATHIPHYLLUM"</code> cause the <code>else</code> block to run?</label><textarea id="r4"></textarea></div><br>
+<div><label>5. Why is indentation important inside an <code>if</code>, <code>elif</code>, or <code>else</code> block?</label><textarea id="r5"></textarea></div>
+</section>
+
+<div class="actions">
+<button id="saveBtn">Save Progress</button>
+<button id="pdfBtn">Generate PDF</button>
+<button class="secondary" onclick="window.print()">Print / Save as PDF</button>
+<button id="clearBtn" class="danger">Clear Saved Progress</button>
+<span id="status" class="status"></span>
+</div>
+</main>
+
+<script>
+const KEY="python_lab13_conditionals_v1",shots={};
+function setStatus(msg,bad=false){const e=document.getElementById("status");e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";setTimeout(()=>{if(e.textContent===msg)e.textContent=""},5000)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function collect(){const reflections={};for(let i=1;i<=5;i++)reflections["r"+i]=document.getElementById("r"+i).value;return {studentName:studentName.value,course:course.value,labDate:labDate.value,reflections,screenshots:{...shots}}}
+function saveProgress(){try{localStorage.setItem(KEY,JSON.stringify(collect()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Could not save all progress. Try smaller screenshots.",true)}}
+function loadProgress(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"ITSE 2421";labDate.value=d.labDate||"";Object.entries(d.reflections||{}).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v});Object.assign(shots,d.screenshots||{});Object.entries(shots).forEach(([k,v])=>{const i=document.querySelector(`[data-preview="${k}"]`);if(i){i.src=v;i.style.display="block"}})}catch(e){}}
+function compressImage(file,w=1400,q=.78){
+ return new Promise((resolve,reject)=>{
+  const r=new FileReader();
+  r.onload=e=>{
+   const img=new Image();
+   img.onload=()=>{
+    try{
+     const scale=Math.min(1,w/img.width),c=document.createElement("canvas");
+     c.width=Math.max(1,Math.round(img.width*scale));
+     c.height=Math.max(1,Math.round(img.height*scale));
+     const ctx=c.getContext("2d");
+     ctx.drawImage(img,0,0,c.width,c.height);
+     resolve(c.toDataURL("image/jpeg",q));
+    }catch(err){reject(err)}
+   };
+   img.onerror=()=>reject(new Error("Image could not be decoded"));
+   img.src=e.target.result;
+  };
+  r.onerror=()=>reject(new Error("File could not be read"));
+  r.readAsDataURL(file);
+ })
+}
+function attachScreenshotHandlers(){
+ document.querySelectorAll('input[type="file"][data-shot]').forEach(inp=>{
+  if(inp.dataset.bound==="1")return;
+  inp.dataset.bound="1";
+  inp.addEventListener("change",async function(){
+   const f=this.files&&this.files[0];
+   if(!f)return;
+   const key=this.dataset.shot,task=key.replace("shot","");
+   try{
+    setStatus("Preparing screenshot...");
+    const d=await compressImage(f);
+    shots[key]=d;
+    const preview=document.querySelector('[data-preview="'+key+'"]');
+    if(preview){
+     preview.src=d;
+     preview.alt="Task "+task+" screenshot";
+     preview.style.display="block";
+    }
+    try{localStorage.setItem(KEY,JSON.stringify(collect()))}
+    catch(storageError){setStatus("Screenshot attached. Browser storage is full, so click Generate PDF before leaving this page.",true);return}
+    setStatus("Screenshot attached for Task "+task+".");
+   }catch(e){
+    console.error(e);
+    setStatus("Could not attach that image. Please use a PNG or JPG screenshot.",true);
+   }
+  });
+ });
+}
+document.querySelectorAll(".code.no-copy").forEach(b=>["copy","cut","contextmenu","dragstart"].forEach(evt=>b.addEventListener(evt,e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.",true)})));
+
+function buildPages(){
+ const d=collect(),pages=[];
+ function add(inner){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=inner;document.body.appendChild(p);pages.push(p)}
+ add(`<h1 style="margin:0 0 10px;font-size:26px">Lab 13 — Comparison operators and conditional execution</h1><p><strong>Student:</strong> ${esc(d.studentName||"")} &nbsp;&nbsp; <strong>Course:</strong> ${esc(d.course||"")} &nbsp;&nbsp; <strong>Date:</strong> ${esc(d.labDate||"")}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page and automatically scaled to fit.</p>`);
+ const items=[];for(const i of [1,2,3,4,5])items.push({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]});
+ for(let s=0;s<items.length;s+=2){let h=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;items.slice(s,s+2).forEach(it=>{h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot uploaded.</em>"}</div></div>`});add(h)}
+ const qs=["What does the == operator do?","What is the difference between if, elif, and else?","Why are Spathiphyllum and spathiphyllum treated differently?","Why does SPATHIPHYLLUM cause the else block to run?","Why is indentation important inside an if, elif, or else block?"];
+ for(let s=0;s<qs.length;s+=3){let h=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;qs.slice(s,s+3).forEach((q,o)=>{const i=s+o+1;h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;font-size:14px;overflow-wrap:anywhere">${esc(d.reflections["r"+i]||"")}</div></div>`});add(h)}
+ return pages
+}
+pdfBtn.addEventListener("click",async()=>{pdfBtn.disabled=true;setStatus("Creating PDF...");let pages=[];try{if(!window.html2canvas||!window.jspdf)throw new Error("PDF library unavailable");pages=buildPages();await new Promise(r=>setTimeout(r,350));const {jsPDF}=window.jspdf,pdf=new jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.35,useCORS:true,backgroundColor:"#fff"});if(i>0)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",0,0,210,297)}const safe=(studentName.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");pdf.save(safe+"_Lab13_Conditionals.pdf");setStatus("PDF generated.")}catch(e){console.error(e);setStatus("Automatic PDF unavailable. Opening print dialog...",true);setTimeout(()=>window.print(),500)}finally{pages.forEach(p=>p.remove());pdfBtn.disabled=false}});
+saveBtn.addEventListener("click",saveProgress);clearBtn.addEventListener("click",()=>{if(confirm("Clear all saved Lab 13 progress?")){localStorage.removeItem(KEY);location.reload()}});
+window.addEventListener("DOMContentLoaded",()=>{attachScreenshotHandlers();loadProgress();if(!labDate.value)labDate.value=new Date().toISOString().slice(0,10)});
+</script>
+</body></html>

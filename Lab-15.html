@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 15 — Essentials of the if-elif-else statement 2</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{--bg:#07111f;--panel:#0e1b2d;--text:#eaf2ff;--muted:#b9c8dc;--accent:#48d7ff;--border:#28415e;--good:#70e6a0}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#06101d,#0b1b30);color:var(--text);font-family:Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1050px;margin:auto;padding:28px 18px 70px}.hero,.card{background:rgba(14,27,45,.96);border:1px solid var(--border);border-radius:16px;padding:24px;margin:0 0 20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+h1{margin:0 0 8px;font-size:31px}h2{margin-top:0}.muted{color:var(--muted)}.tag{display:inline-block;border:1px solid var(--accent);color:var(--accent);padding:4px 9px;border-radius:999px;font-size:13px}
+.notice{border-left:4px solid var(--accent);padding:12px 14px;background:#0a2033;border-radius:8px}.warning{border-left-color:#ffcc66;background:#33280a}.code{background:#020811;border:1px solid #20384f;border-radius:10px;padding:15px;white-space:pre-wrap;font:15px/1.55 Menlo,Consolas,monospace;color:#d9f6ff}
+.code.no-copy{user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;cursor:default}.expected{background:#08150e;border-color:#244c33}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:700;display:block;margin-bottom:6px}
+input[type=text],input[type=date],textarea{width:100%;padding:11px;border-radius:8px;border:1px solid #45617e;background:#071321;color:#fff;font:inherit}
+textarea{min-height:115px;resize:vertical}.upload{border:1px dashed #54708e;border-radius:10px;padding:14px;margin-top:14px}.preview{max-width:100%;max-height:360px;display:block;margin-top:10px;border-radius:8px}
+button{border:0;border-radius:9px;padding:11px 16px;font-weight:700;cursor:pointer;margin:5px;background:var(--accent);color:#04101b}.secondary{background:#29435f;color:#fff}.danger{background:#7b2f3c;color:#fff}
+.actions{position:sticky;bottom:10px;background:rgba(5,13,24,.94);border:1px solid var(--border);padding:10px;border-radius:12px;z-index:4}.status{margin-left:8px;color:var(--good)}
+@media(max-width:700px){.grid{grid-template-columns:1fr}h1{font-size:25px}}
+@media print{body{background:#fff;color:#111}.actions{display:none}.hero,.card{box-shadow:none;background:#fff;color:#111;border:1px solid #ccc}.code{color:#111;background:#f6f6f6}}
+</style>
+</head>
+<body><main class="wrap">
+<section class="hero">
+<span class="badge">Interactive Python Lab</span>
+<h1>Lab 15 — Essentials of the if-elif-else statement 2</h1>
+<p class="muted">Build a leap-year checker while practicing nested conditional statements, the modulus operator, and multiple decision paths.</p>
+</section>
+
+<section class="card">
+<h2>Before You Begin</h2>
+<div class="grid">
+<div><label>Student Name</label><input id="studentName" type="text"></div>
+<div><label>Course</label><input id="course" type="text" value="ITSE 2421"></div>
+<div><label>Date</label><input id="labDate" type="date"></div>
+</div>
+<p><strong>Python filename:</strong> <code>Lab15.py</code></p>
+<div class="notice"><strong>Development environment:</strong> You may use your favorite Python IDE or code editor. <strong>GitHub Codespaces is recommended</strong>.</div>
+<p><strong>Important:</strong> Type the Python code manually. Copying from the code reference boxes is disabled.</p>
+</section>
+
+<section class="card">
+<h2>Objectives</h2>
+<ul>
+<li>Use <code>if</code>, <code>elif</code>, and <code>else</code> to evaluate several conditions.</li>
+<li>Use the modulus operator <code>%</code> to determine whether a number is divisible by another number.</li>
+<li>Use nested conditional logic to classify a year as a leap year or common year.</li>
+<li>Apply the Gregorian-calendar cutoff before checking leap-year rules.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Quick Guide — Divisibility and the Modulus Operator</h2>
+<p>The modulus operator <code>%</code> gives the <strong>remainder</strong> after division. It is useful for checking whether one number is evenly divisible by another.</p>
+<div class="notice">
+<code>year % 4 != 0</code> → the year is <strong>not</strong> evenly divisible by 4.<br><br>
+<code>year % 100 != 0</code> → the year is <strong>not</strong> evenly divisible by 100.<br><br>
+<code>year % 400 != 0</code> → the year is <strong>not</strong> evenly divisible by 400.<br><br>
+<code>!=</code> means <strong>not equal to</strong>.
+</div>
+<p>If a remainder is <code>0</code>, the number is evenly divisible. For example, <code>2024 % 4</code> is <code>0</code>, so 2024 is divisible by 4.</p>
+</section>
+
+<section class="card">
+<h2>Lab Scenario</h2>
+<p>You will write a program that determines whether a year is a <strong>leap year</strong> (366 days) or a <strong>common year</strong> (365 days) using the Gregorian calendar rules.</p>
+<div class="notice">
+<strong>Leap-Year Rules</strong><br><br>
+1. If the year is not divisible by 4 → <strong>Common year</strong><br>
+2. If divisible by 4 but not by 100 → <strong>Leap year</strong><br>
+3. If divisible by 100 but not by 400 → <strong>Common year</strong><br>
+4. If divisible by 400 → <strong>Leap year</strong>
+</div>
+<p>The Gregorian calendar cutoff used by this activity is <strong>1582</strong>. If the entered year is earlier than 1582, the program should display <code>Not within the Gregorian calendar period</code>.</p>
+</section>
+
+<section class="card">
+<h2>Task 1 — Read the Year</h2>
+<p>Create <code>Lab15.py</code>. Ask the user to enter a year and convert the input to an integer.</p>
+<div class="code no-copy">year = int(input("Enter a year: "))</div>
+<p><code>input()</code> receives text, and <code>int()</code> converts that text into an integer that can be used in comparisons and calculations.</p>
+<div class="upload"><label>Task 1 Screenshot — Year input</label><input type="file" accept="image/*" data-shot="shot1"><img class="preview" data-preview="shot1"></div>
+</section>
+
+<section class="card">
+<h2>Task 2 — Check the Gregorian Calendar Period</h2>
+<p>Before checking whether the year is a leap year, first determine whether it is within the Gregorian-calendar period used by this activity.</p>
+<div class="code no-copy">if year &lt; 1582:
+    print("Not within the Gregorian calendar period")</div>
+<p>If the condition is <code>True</code>, the warning is printed. The leap-year checks belong under the corresponding <code>else</code>, so they are only evaluated for years of 1582 or later.</p>
+<div class="upload"><label>Task 2 Screenshot — Gregorian calendar check</label><input type="file" accept="image/*" data-shot="shot2"><img class="preview" data-preview="shot2"></div>
+</section>
+
+<section class="card">
+<h2>Task 3 — Determine Leap Year or Common Year</h2>
+<p>Add an <code>else</code> and place the leap-year decision structure inside it. Python checks the conditions from top to bottom and stops when it finds the first condition that is True.</p>
+<div class="code no-copy">else:
+    if year % 4 != 0:
+        print("Common year")
+    elif year % 100 != 0:
+        print("Leap year")
+    elif year % 400 != 0:
+        print("Common year")
+    else:
+        print("Leap year")</div>
+<p><strong>How the logic works:</strong> a year that fails the divisibility-by-4 test is immediately classified as common. If it passes, Python continues to the 100 and 400 checks to handle century years correctly.</p>
+<div class="upload"><label>Task 3 Screenshot — Completed conditional structure</label><input type="file" accept="image/*" data-shot="shot3"><img class="preview" data-preview="shot3"></div>
+</section>
+
+<section class="card">
+<h2>Task 4 — Test Different Years</h2>
+<p>Run your completed program several times. Use years that exercise different branches of the decision structure.</p>
+<div class="notice">
+<strong>Suggested tests based on the rules:</strong><br><br>
+A year before <code>1582</code> → Gregorian-calendar warning<br>
+A year not divisible by <code>4</code> → Common year<br>
+A year divisible by <code>4</code> but not <code>100</code> → Leap year<br>
+A year divisible by <code>100</code> but not <code>400</code> → Common year<br>
+A year divisible by <code>400</code> → Leap year
+</div>
+<p>The supplied guide does not provide a specific test-data table, so choose values that demonstrate each rule.</p>
+<div class="upload"><label>Task 4 Screenshot — Test results</label><input type="file" accept="image/*" data-shot="shot4"><img class="preview" data-preview="shot4"></div>
+</section>
+
+<section class="card">
+<h2>Reflection Questions</h2>
+<div><label>1. What does the modulus operator <code>%</code> tell you?</label><textarea id="r1"></textarea></div><br>
+<div><label>2. Why does the program check whether the year is less than 1582 first?</label><textarea id="r2"></textarea></div><br>
+<div><label>3. What does <code>year % 4 != 0</code> mean?</label><textarea id="r3"></textarea></div><br>
+<div><label>4. Why does the program need additional checks for years divisible by 100 and 400?</label><textarea id="r4"></textarea></div><br>
+<div><label>5. Explain why a year divisible by 400 is classified as a leap year.</label><textarea id="r5"></textarea></div>
+</section>
+
+<div class="actions">
+<button id="saveBtn">Save Progress</button>
+<button id="pdfBtn">Generate PDF</button>
+<button class="secondary" onclick="window.print()">Print / Save as PDF</button>
+<button id="clearBtn" class="danger">Clear Saved Progress</button>
+<span id="status" class="status"></span>
+</div>
+</main>
+
+<script>
+const KEY="python_lab15_leapyear_v1",shots={};
+function setStatus(msg,bad=false){const e=document.getElementById("status");e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";setTimeout(()=>{if(e.textContent===msg)e.textContent=""},5000)}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function collect(){const reflections={};for(let i=1;i<=5;i++)reflections["r"+i]=document.getElementById("r"+i).value;return {studentName:studentName.value,course:course.value,labDate:labDate.value,reflections,screenshots:{...shots}}}
+function saveProgress(){try{localStorage.setItem(KEY,JSON.stringify(collect()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Could not save all progress. Try smaller screenshots.",true)}}
+function loadProgress(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"ITSE 2421";labDate.value=d.labDate||"";Object.entries(d.reflections||{}).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v});Object.assign(shots,d.screenshots||{});Object.entries(shots).forEach(([k,v])=>{const i=document.querySelector(`[data-preview="${k}"]`);if(i){i.src=v;i.style.display="block"}})}catch(e){}}
+function compressImage(file,w=1400,q=.78){
+ return new Promise((resolve,reject)=>{
+  const r=new FileReader();
+  r.onload=e=>{
+   const img=new Image();
+   img.onload=()=>{
+    try{
+     const scale=Math.min(1,w/img.width),c=document.createElement("canvas");
+     c.width=Math.max(1,Math.round(img.width*scale));
+     c.height=Math.max(1,Math.round(img.height*scale));
+     const ctx=c.getContext("2d");
+     ctx.drawImage(img,0,0,c.width,c.height);
+     resolve(c.toDataURL("image/jpeg",q));
+    }catch(err){reject(err)}
+   };
+   img.onerror=()=>reject(new Error("Image could not be decoded"));
+   img.src=e.target.result;
+  };
+  r.onerror=()=>reject(new Error("File could not be read"));
+  r.readAsDataURL(file);
+ })
+}
+function attachScreenshotHandlers(){
+ document.querySelectorAll('input[type="file"][data-shot]').forEach(inp=>{
+  if(inp.dataset.bound==="1")return;
+  inp.dataset.bound="1";
+  inp.addEventListener("change",async function(){
+   const f=this.files&&this.files[0];
+   if(!f)return;
+   const key=this.dataset.shot,task=key.replace("shot","");
+   try{
+    setStatus("Preparing screenshot...");
+    const d=await compressImage(f);
+    shots[key]=d;
+    const preview=document.querySelector('[data-preview="'+key+'"]');
+    if(preview){
+     preview.src=d;
+     preview.alt="Task "+task+" screenshot";
+     preview.style.display="block";
+    }
+    try{localStorage.setItem(KEY,JSON.stringify(collect()))}
+    catch(storageError){setStatus("Screenshot attached. Browser storage is full, so click Generate PDF before leaving this page.",true);return}
+    setStatus("Screenshot attached for Task "+task+".");
+   }catch(e){
+    console.error(e);
+    setStatus("Could not attach that image. Please use a PNG or JPG screenshot.",true);
+   }
+  });
+ });
+}
+document.querySelectorAll(".code.no-copy").forEach(b=>["copy","cut","contextmenu","dragstart"].forEach(evt=>b.addEventListener(evt,e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.",true)})));
+
+function buildPages(){
+ const d=collect(),pages=[];
+ function add(inner){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=inner;document.body.appendChild(p);pages.push(p)}
+ add(`<h1 style="margin:0 0 10px;font-size:26px">Lab 15 — Essentials of the if-elif-else statement 2</h1><p><strong>Student:</strong> ${esc(d.studentName||"")} &nbsp;&nbsp; <strong>Course:</strong> ${esc(d.course||"")} &nbsp;&nbsp; <strong>Date:</strong> ${esc(d.labDate||"")}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page and automatically scaled to fit.</p>`);
+ const items=[];for(const i of [1,2,3,4])items.push({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]});
+ for(let s=0;s<items.length;s+=2){let h=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;items.slice(s,s+2).forEach(it=>{h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot uploaded.</em>"}</div></div>`});add(h)}
+ const qs=["What does the modulus operator % tell you?","Why does the program check whether the year is less than 1582 first?","What does year % 4 != 0 mean?","Why does the program need additional checks for years divisible by 100 and 400?","Explain why a year divisible by 400 is classified as a leap year."];
+ for(let s=0;s<qs.length;s+=3){let h=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;qs.slice(s,s+3).forEach((q,o)=>{const i=s+o+1;h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;font-size:14px;overflow-wrap:anywhere">${esc(d.reflections["r"+i]||"")}</div></div>`});add(h)}
+ return pages
+}
+pdfBtn.addEventListener("click",async()=>{pdfBtn.disabled=true;setStatus("Creating PDF...");let pages=[];try{if(!window.html2canvas||!window.jspdf)throw new Error("PDF library unavailable");pages=buildPages();await new Promise(r=>setTimeout(r,350));const {jsPDF}=window.jspdf,pdf=new jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.35,useCORS:true,backgroundColor:"#fff"});if(i>0)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",0,0,210,297)}const safe=(studentName.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");pdf.save(safe+"_Lab15_Leap_Year.pdf");setStatus("PDF generated.")}catch(e){console.error(e);setStatus("Automatic PDF unavailable. Opening print dialog...",true);setTimeout(()=>window.print(),500)}finally{pages.forEach(p=>p.remove());pdfBtn.disabled=false}});
+saveBtn.addEventListener("click",saveProgress);clearBtn.addEventListener("click",()=>{if(confirm("Clear all saved Lab 15 progress?")){localStorage.removeItem(KEY);location.reload()}});
+window.addEventListener("DOMContentLoaded",()=>{attachScreenshotHandlers();loadProgress();if(!labDate.value)labDate.value=new Date().toISOString().slice(0,10)});
+</script>
+</body></html>
