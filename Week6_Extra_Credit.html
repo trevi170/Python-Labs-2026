@@ -67,86 +67,154 @@ print(&quot;Thank you!&quot;)</pre></div><div class="upload"><label>Attach Task 
 <section class="card"><h2>Submission</h2><p>Generate your PDF, then submit <code>lab_campus_store.py</code> and the generated PDF as directed by your instructor.</p><div class="actions"><button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button><button id="printBtn" type="button">Print / Save as PDF</button><button id="clearBtn" type="button">Clear Saved Progress</button></div><p id="status" aria-live="polite"></p></section></main>
 
 <script>
-const KEY="python_lab14_ifelse_v1",shots={};
-function setStatus(msg,bad=false){const e=document.getElementById("status");e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";setTimeout(()=>{if(e.textContent===msg)e.textContent=""},5000)}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
-function collect(){const reflections={};for(let i=1;i<=5;i++)reflections["r"+i]=document.getElementById("r"+i).value;return {studentName:studentName.value,course:course.value,labDate:labDate.value,reflections,screenshots:{...shots}}}
-function saveProgress(){try{localStorage.setItem(KEY,JSON.stringify(collect()));setStatus("Progress saved in this browser.")}catch(e){setStatus("Could not save all progress. Try smaller screenshots.",true)}}
-function loadProgress(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;studentName.value=d.studentName||"";course.value=d.course||"ITSE 2421";labDate.value=d.labDate||"";Object.entries(d.reflections||{}).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v});Object.assign(shots,d.screenshots||{});Object.entries(shots).forEach(([k,v])=>{const i=document.querySelector(`[data-preview="${k}"]`);if(i){i.src=v;i.style.display="block"}})}catch(e){}}
-function compressImage(file,w=1400,q=.78){
+const KEY="week6_campus_store_v3";
+const shots={};
+const $=id=>document.getElementById(id);
+function setStatus(msg,bad=false){
+ const e=$("status"); if(!e)return;
+ e.textContent=msg; e.style.color=bad?"#ff9c9c":"#70e6a0";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function collect(){
+ const reflections={};
+ for(let i=1;i<=5;i++) reflections["q"+i]=($("q"+i)?.value||"");
+ return {
+  studentName:$("studentName")?.value||"",
+  course:$("courseName")?.value||"ITSE 2421",
+  labDate:$("labDate")?.value||"",
+  reflections,
+  screenshots:{...shots}
+ };
+}
+function saveProgress(){
+ try{
+  localStorage.setItem(KEY,JSON.stringify(collect()));
+  setStatus("Progress saved in this browser.");
+ }catch(e){
+  setStatus("Progress is too large for browser storage. Your attached screenshots still remain available on this page for PDF generation.",true);
+ }
+}
+function loadProgress(){
+ try{
+  const d=JSON.parse(localStorage.getItem(KEY)||"null"); if(!d)return;
+  if($("studentName")) $("studentName").value=d.studentName||"";
+  if($("courseName")) $("courseName").value=d.course||"ITSE 2421";
+  if($("labDate")) $("labDate").value=d.labDate||"";
+  for(let i=1;i<=5;i++) if($("q"+i)) $("q"+i).value=(d.reflections||{})["q"+i]||"";
+  Object.assign(shots,d.screenshots||{});
+  Object.entries(shots).forEach(([k,v])=>{
+   const img=document.querySelector('[data-preview="'+k+'"]');
+   if(img){img.src=v;img.style.display="block";}
+  });
+ }catch(e){}
+}
+function compressImage(file,maxW=1200,quality=.72){
  return new Promise((resolve,reject)=>{
-  const r=new FileReader();
-  r.onload=e=>{
+  if(!file || !file.type.startsWith("image/")) return reject(new Error("Please select an image file."));
+  const reader=new FileReader();
+  reader.onerror=()=>reject(new Error("Unable to read image."));
+  reader.onload=()=>{
    const img=new Image();
+   img.onerror=()=>reject(new Error("Unable to decode image."));
    img.onload=()=>{
     try{
-     const scale=Math.min(1,w/img.width),c=document.createElement("canvas");
+     const scale=Math.min(1,maxW/img.width);
+     const c=document.createElement("canvas");
      c.width=Math.max(1,Math.round(img.width*scale));
      c.height=Math.max(1,Math.round(img.height*scale));
-     const ctx=c.getContext("2d");
-     ctx.drawImage(img,0,0,c.width,c.height);
-     resolve(c.toDataURL("image/jpeg",q));
-    }catch(err){reject(err)}
+     c.getContext("2d").drawImage(img,0,0,c.width,c.height);
+     resolve(c.toDataURL("image/jpeg",quality));
+    }catch(e){reject(e);}
    };
-   img.onerror=()=>reject(new Error("Image could not be decoded"));
-   img.src=e.target.result;
+   img.src=reader.result;
   };
-  r.onerror=()=>reject(new Error("File could not be read"));
-  r.readAsDataURL(file);
- })
+  reader.readAsDataURL(file);
+ });
 }
 function attachScreenshotHandlers(){
  document.querySelectorAll('input[type="file"][data-shot]').forEach(inp=>{
-  if(inp.dataset.bound==="1")return;
-  inp.dataset.bound="1";
-  inp.addEventListener("change",async function(){
-   const f=this.files&&this.files[0];
-   if(!f)return;
-   const key=this.dataset.shot,task=key.replace("shot","");
+  inp.onchange=async function(){
+   const file=this.files?.[0]; if(!file)return;
+   const key=this.dataset.shot;
    try{
-    setStatus("Preparing screenshot...");
-    const d=await compressImage(f);
-    shots[key]=d;
-    const preview=document.querySelector('[data-preview="'+key+'"]');
-    if(preview){
-     preview.src=d;
-     preview.alt="Task "+task+" screenshot";
-     preview.style.display="block";
-    }
-    try{localStorage.setItem(KEY,JSON.stringify(collect()))}
-    catch(storageError){setStatus("Screenshot attached. Browser storage is full, so click Generate PDF before leaving this page.",true);return}
-    setStatus("Screenshot attached for Task "+task+".");
-   }catch(e){
-    console.error(e);
-    setStatus("Could not attach that image. Please use a PNG or JPG screenshot.",true);
-   }
-  });
+    setStatus("Attaching screenshot...");
+    const data=await compressImage(file);
+    shots[key]=data;
+    const img=document.querySelector('[data-preview="'+key+'"]');
+    if(img){img.src=data;img.style.display="block";img.style.maxWidth="100%";img.style.maxHeight="420px";img.style.objectFit="contain";img.style.marginTop="12px";}
+    setStatus("Screenshot attached successfully.");
+   }catch(e){console.error(e);setStatus(e.message||"Could not attach screenshot.",true);}
+  };
  });
 }
-document.querySelectorAll(".code.no-copy").forEach(b=>["copy","cut","contextmenu","dragstart"].forEach(evt=>b.addEventListener(evt,e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.",true)})));
-
 function buildPages(){
  const d=collect(),pages=[];
- function add(inner){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=inner;document.body.appendChild(p);pages.push(p)}
- add(`<h1 style="margin:0 0 10px;font-size:26px">Week 6 Extra Credit — Campus Store Checkout + Discount Engine</h1><p><strong>Student:</strong> ${esc(d.studentName||"")} &nbsp;&nbsp; <strong>Course:</strong> ${esc(d.course||"")} &nbsp;&nbsp; <strong>Date:</strong> ${esc(d.labDate||"")}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page and automatically scaled to fit.</p>`);
- const items=[];for(const i of [2,3,4,5,6,7,8])items.push({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]});
- for(let s=0;s<items.length;s+=2){let h=`<h2 style="margin:0 0 20px">Task Evidence</h2>`;items.slice(s,s+2).forEach(it=>{h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot uploaded.</em>"}</div></div>`});add(h)}
- const qs=["1. Why are elif statements useful for the discount rules?","2. Why must the senior discount be checked first?","3. What must be true for the student discount to apply?","4. Why is tax calculated using new_subtotal?","5. What does or do in the optional sticker rule?"];
- for(let s=0;s<qs.length;s+=3){let h=`<h2 style="margin:0 0 22px">Reflection Questions</h2>`;qs.slice(s,s+3).forEach((q,o)=>{const i=s+o+1;h+=`<div style="margin:0 0 22px;break-inside:avoid"><p style="font-weight:700;margin:0 0 8px">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px;font-size:14px;overflow-wrap:anywhere">${esc(d.reflections["r"+i]||"")}</div></div>`});add(h)}
- return pages
+ function add(inner){
+  const p=document.createElement("div");
+  p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";
+  p.innerHTML=inner; document.body.appendChild(p); pages.push(p);
+ }
+ add(`<h1 style="font-size:26px">Week 6 Extra Credit — Campus Store Checkout + Discount Engine</h1>
+ <p><strong>Student:</strong> ${esc(d.studentName)} &nbsp; <strong>Course:</strong> ${esc(d.course)} &nbsp; <strong>Date:</strong> ${esc(d.labDate)}</p>
+ <hr><h2>Task Evidence</h2><p>Required screenshots: Tasks 2–8.</p>`);
+ const items=[2,3,4,5,6,7,8].map(i=>({label:"Task "+i+" Screenshot",shot:d.screenshots["shot"+i]}));
+ for(let s=0;s<items.length;s+=2){
+  let x='<h2 style="margin:0 0 20px">Task Evidence</h2>';
+  items.slice(s,s+2).forEach(it=>{
+   x+=`<div style="margin-bottom:22px"><p style="font-weight:700">${it.label}</p><div style="height:430px;border:1px solid #bbb;padding:10px;display:flex;align-items:center;justify-content:center;box-sizing:border-box">${it.shot?`<img src="${it.shot}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot attached.</em>"}</div></div>`;
+  }); add(x);
+ }
+ const qs=[
+  "Why are elif statements useful for the discount rules?",
+  "Why must the senior discount be checked first?",
+  "What must be true for the student discount to apply?",
+  "Why is tax calculated using new_subtotal?",
+  "What does or do in the optional sticker rule?"
+ ];
+ for(let s=0;s<qs.length;s+=3){
+  let x='<h2 style="margin:0 0 22px">Reflection Questions</h2>';
+  qs.slice(s,s+3).forEach((q,o)=>{
+   const i=s+o+1;
+   x+=`<div style="margin-bottom:22px"><p style="font-weight:700">${i}. ${esc(q)}</p><div style="white-space:pre-wrap;border:1px solid #bbb;padding:12px;min-height:185px">${esc(d.reflections["q"+i])}</div></div>`;
+  }); add(x);
+ }
+ return pages;
 }
-pdfBtn.addEventListener("click",async()=>{pdfBtn.disabled=true;setStatus("Creating PDF...");let pages=[];try{if(!window.html2canvas||!window.jspdf)throw new Error("PDF library unavailable");pages=buildPages();await new Promise(r=>setTimeout(r,350));const {jsPDF}=window.jspdf,pdf=new jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.35,useCORS:true,backgroundColor:"#fff"});if(i>0)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.92),"JPEG",0,0,210,297)}const safe=(studentName.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");pdf.save(safe+"_Lab14_If_Else.pdf");setStatus("PDF generated.")}catch(e){console.error(e);setStatus("Automatic PDF unavailable. Opening print dialog...",true);setTimeout(()=>window.print(),500)}finally{pages.forEach(p=>p.remove());pdfBtn.disabled=false}});
-saveBtn.addEventListener("click",saveProgress);clearBtn.addEventListener("click",()=>{if(confirm("Clear all saved Lab 14 progress?")){localStorage.removeItem(KEY);location.reload()}});
+async function generatePDF(){
+ const btn=$("pdfBtn"); if(btn)btn.disabled=true;
+ let pages=[];
+ try{
+  setStatus("Creating PDF...");
+  if(typeof window.html2canvas!=="function" || !window.jspdf?.jsPDF) throw new Error("PDF libraries did not load.");
+  pages=buildPages();
+  await new Promise(r=>setTimeout(r,250));
+  const {jsPDF}=window.jspdf;
+  const pdf=new jsPDF("p","mm","a4");
+  for(let i=0;i<pages.length;i++){
+   const c=await window.html2canvas(pages[i],{scale:1.25,useCORS:true,backgroundColor:"#ffffff"});
+   if(i>0)pdf.addPage();
+   pdf.addImage(c.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297);
+  }
+  const safe=($("studentName")?.value.trim()||"Student").replace(/[^a-z0-9_-]+/gi,"_");
+  pdf.save(safe+"_Week6_Extra_Credit_Campus_Store.pdf");
+  setStatus("PDF generated successfully.");
+ }catch(e){
+  console.error(e);
+  setStatus("PDF could not be generated automatically. Use Print / Save as PDF.",true);
+ }finally{
+  pages.forEach(p=>p.remove());
+  if(btn)btn.disabled=false;
+ }
+}
 function initializeLab(){
- attachScreenshotHandlers();
- loadProgress();
- const dateEl=document.getElementById("labDate");
- if(dateEl && !dateEl.value) dateEl.value=new Date().toISOString().slice(0,10);
+ attachScreenshotHandlers(); loadProgress();
+ if($("labDate")&&!$("labDate").value) $("labDate").value=new Date().toISOString().slice(0,10);
+ $("saveBtn")?.addEventListener("click",saveProgress);
+ $("pdfBtn")?.addEventListener("click",generatePDF);
+ $("printBtn")?.addEventListener("click",()=>window.print());
+ $("clearBtn")?.addEventListener("click",()=>{if(confirm("Clear all saved Week 6 Extra Credit progress?")){localStorage.removeItem(KEY);location.reload();}});
+ document.querySelectorAll(".code.no-copy").forEach(b=>["copy","cut","contextmenu","dragstart"].forEach(evt=>b.addEventListener(evt,e=>{e.preventDefault();setStatus("Code copying is disabled. Please type the code manually.",true);})));
 }
-if(document.readyState==="loading"){
- document.addEventListener("DOMContentLoaded",initializeLab,{once:true});
-}else{
- initializeLab();
-}
+if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",initializeLab,{once:true}); else initializeLab();
 </script>
 </body></html>
