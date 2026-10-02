@@ -21,6 +21,8 @@ button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:700;c
 <h1>Collatz's hypothesis</h1>
 <p>Use conditionals, a <code>while</code> loop, and arithmetic operations to implement the Collatz algorithm.</p></section>
 
+
+
 <section class="card"><h2>Before You Begin</h2>
 <div class="grid"><label>Student Name<input id="studentName" type="text" placeholder="Enter your full name"></label>
 <label>Course<input id="courseName" type="text" value="ITSE 2421" readonly></label></div>
@@ -32,47 +34,94 @@ button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:700;c
 <section class="card"><h2>Objective</h2>
 <p>Implement the Collatz conjecture algorithm in Python while practicing conditional statements, loops, and arithmetic operations.</p></section>
 
-<section class="card"><h2>Quick Guide — Understanding the Collatz Rules</h2>
+<section class="card"><h2>What Is Collatz's Hypothesis?</h2>
+<p>The original lab explains that German mathematician <strong>Lothar Collatz</strong> formulated this hypothesis in 1937 and that it remains unproven. For this exercise, you will use Python to test individual starting numbers.</p>
+<p>Start with a positive, non-zero integer called <code>c0</code>. Then follow these rules:</p>
+<ol>
+<li>If <code>c0</code> is <strong>even</strong>, calculate <code>c0 ÷ 2</code>.</li>
+<li>If <code>c0</code> is <strong>odd</strong>, calculate <code>3 × c0 + 1</code>.</li>
+<li>Make the result the new <code>c0</code>.</li>
+<li>If <code>c0</code> is not 1, repeat the process.</li>
+</ol>
+<p>The hypothesis says this process eventually reaches <code>1</code> for any positive starting value. This lab is about <strong>implementing and observing</strong> the process, not proving the hypothesis.</p>
+</section>
+
+<section class="card"><h2>Follow the Process Before You Code</h2>
+<p>Here is a practice example using <code>c0 = 6</code>. At each step, decide whether the current value is odd or even.</p>
+<pre class="nocopy">Start: c0 = 6
+
+6  → EVEN → 6 // 2       = 3
+3  → ODD  → 3 * 3 + 1   = 10
+10 → EVEN → 10 // 2      = 5
+5  → ODD  → 3 * 5 + 1   = 16
+16 → EVEN → 16 // 2      = 8
+8  → EVEN → 8 // 2       = 4
+4  → EVEN → 4 // 2       = 2
+2  → EVEN → 2 // 2       = 1
+
+STOP — c0 has reached 1.</pre>
+<p><strong>The key idea:</strong> every answer becomes the next value of <code>c0</code>. In Python, <code>c0 = cnew</code> performs that update.</p>
+</section>
+
+<section class="card"><h2>From the Math Rule to Python</h2>
+<div class="rule">
+<p><strong>Is the current value odd?</strong><br><code>if c0 % 2 != 0:</code></p>
+<p><strong>Odd rule:</strong><br><code>cnew = 3 * c0 + 1</code></p>
+<p><strong>Even rule:</strong><br><code>cnew = c0 // 2</code></p>
+<p><strong>Use the answer for the next loop:</strong><br><code>c0 = cnew</code></p>
+<p><strong>Keep repeating until 1:</strong><br><code>while c0 != 1:</code></p>
+</div></section>
+
+<section class="card"><h2>Quick Guide — Understanding the Collatz Rules</h2><p><strong>Big picture:</strong> Think of <code>c0</code> as the current number. The program decides whether it is odd or even, calculates the next number, makes that answer the next <code>c0</code>, and repeats until <code>c0</code> becomes 1.</p>
 <div class="rule"><p><strong>If the number is odd:</strong> calculate <code>3 * c0 + 1</code>.</p>
 <p><strong>If the number is even:</strong> calculate <code>c0 // 2</code>.</p>
 <p>Repeat these calculations while <code>c0 != 1</code>.</p></div>
 <p><strong><code>%</code> — remainder operator:</strong> <code>c0 % 2 != 0</code> means there is a remainder when dividing by 2, so the value is odd.</p>
 <p><strong><code>//</code> — integer division:</strong> <code>c0 // 2</code> divides by 2 and produces an integer result.</p>
 <p><strong><code>cnew</code>:</strong> temporarily stores the next value before it replaces <code>c0</code>.</p>
-<p><strong><code>steps</code>:</strong> counts each update made while working toward 1.</p></section>
+<p><strong><code>steps</code>:</strong> counts each update made while working toward 1.</p><h3>Walk-Through Example — Start with 6</h3><pre class="nocopy">6 is even  → 6 // 2 = 3
+3 is odd   → 3 * 3 + 1 = 10
+10 is even → 10 // 2 = 5
+5 is odd   → 3 * 5 + 1 = 16
+16 is even → 16 // 2 = 8
+8 is even  → 8 // 2 = 4
+4 is even  → 4 // 2 = 2
+2 is even  → 2 // 2 = 1
+
+Now c0 is 1, so the while loop stops.</pre></section>
 
 <section class="card"><h2>Scenario</h2>
 <p>In this lab, you will implement the Collatz conjecture algorithm. The program begins with a user-entered natural number, repeatedly applies a different calculation depending on whether the current value is odd or even, and counts the number of steps until <code>c0</code> reaches 1.</p></section>
 
-<section class="card"><h2>Task 1 — Read the Starting Number</h2><p>Prompt the user to enter a natural number and convert the input to an integer. The guide names this variable <code>c0</code>.</p>
+<section class="card"><h2>Task 1 — Read the Starting Number</h2><p>Ask for the starting number. <code>input()</code> receives text, so <code>int()</code> converts it to an integer. Think of <code>c0</code> as the <strong>current number</strong> throughout the lab.</p>
 <p><strong>Code:</strong></p>
 <pre class="nocopy">c0 = int(input(&quot;Enter c0: &quot;))</pre><label class="upload">Attach Task 1 screenshot
 <input type="file" accept="image/*" data-shot="shot1"></label>
-<img class="preview" data-preview="shot1"></section><section class="card"><h2>Task 2 — Validate the Input</h2><p>Check whether <code>c0</code> is greater than 1. The Collatz processing in this lab runs only when this condition is true.</p>
+<img class="preview" data-preview="shot1"></section><section class="card"><h2>Task 2 — Validate the Input</h2><p>Check the starting value before running the algorithm. If <code>c0 > 1</code> is true, Python runs the indented Collatz code. Otherwise, Python uses the outer <code>else</code> block.</p>
 <p><strong>Code:</strong></p>
-<pre class="nocopy">if c0 &gt; 1:</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 3 — Initialize the Step Counter</h2><p>Inside the <code>if</code> block, create <code>steps</code> and start it at 0. This variable counts how many calculations are needed to reach 1.</p>
+<pre class="nocopy">if c0 &gt; 1:</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 3 — Initialize the Step Counter</h2><p>Start <code>steps</code> at 0 because no calculations have happened yet. Every time the loop produces a new value, the counter increases by 1.</p>
 <p><strong>Code:</strong></p>
-<pre class="nocopy">steps = 0</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 4 — Create the while Loop</h2><p>Create a loop that continues as long as <code>c0</code> is not equal to 1.</p>
+<pre class="nocopy">steps = 0</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 4 — Create the while Loop</h2><p>Read <code>while c0 != 1</code> as: <strong>while the current number is not 1, keep repeating.</strong> The symbol <code>!=</code> means “not equal to.”</p>
 <p><strong>Code:</strong></p>
-<pre class="nocopy">while c0 != 1:</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 5 — Determine Whether c0 Is Odd or Even</h2><p>Inside the loop, use the remainder operator <code>%</code>. If <code>c0 % 2 != 0</code>, the number is odd; otherwise, it is even.</p>
+<pre class="nocopy">while c0 != 1:</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 5 — Determine Whether c0 Is Odd or Even</h2><p>Decide which Collatz rule to use. <code>c0 % 2</code> checks the remainder after division by 2. A nonzero remainder means odd, so calculate <code>3 * c0 + 1</code>. Otherwise it is even, so calculate <code>c0 // 2</code>. Store the answer temporarily in <code>cnew</code>.</p>
 <p><strong>Code:</strong></p>
 <pre class="nocopy">if c0 % 2 != 0:
     cnew = 3 * c0 + 1
 else:
     cnew = c0 // 2</pre><p><strong>Collatz rule:</strong> An odd value uses <code>3 * c0 + 1</code>. An even value uses integer division <code>c0 // 2</code>.</p><label class="upload">Attach Task 5 screenshot
 <input type="file" accept="image/*" data-shot="shot5"></label>
-<img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Print the Current Value</h2><p>While the loop is running, display the current value of <code>c0</code>.</p>
+<img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Print the Current Value</h2><p>Print <code>c0</code> so the user can see the sequence. This happens before <code>c0 = cnew</code>, so Python displays the current number before replacing it.</p>
 <p><strong>Code:</strong></p>
-<pre class="nocopy">print(c0)</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 7 — Update the Value and Step Counter</h2><p>Replace <code>c0</code> with <code>cnew</code>, then increase <code>steps</code> by 1.</p>
+<pre class="nocopy">print(c0)</pre><p><em>No screenshot is required for this explanation/build step.</em></p></section><section class="card"><h2>Task 7 — Update the Value and Step Counter</h2><p>This is the key update. <code>c0 = cnew</code> makes the calculated answer the current number for the next loop. Then <code>steps += 1</code> records one completed calculation. Without updating <code>c0</code>, the loop would keep processing the same number.</p>
 <p><strong>Code:</strong></p>
 <pre class="nocopy">c0 = cnew
 steps += 1</pre><label class="upload">Attach Task 7 screenshot
 <input type="file" accept="image/*" data-shot="shot7"></label>
-<img class="preview" data-preview="shot7"></section><section class="card"><h2>Task 8 — Print the Total Steps</h2><p>After the <code>while</code> loop finishes, print the number of steps required to reach 1.</p>
+<img class="preview" data-preview="shot7"></section><section class="card"><h2>Task 8 — Print the Total Steps</h2><p>When <code>c0</code> becomes 1, the <code>while</code> condition becomes false. Python leaves the loop and prints the total number of calculations.</p>
 <p><strong>Code:</strong></p>
 <pre class="nocopy">print(&quot;steps =&quot;, steps)</pre><label class="upload">Attach Task 8 screenshot
 <input type="file" accept="image/*" data-shot="shot8"></label>
-<img class="preview" data-preview="shot8"></section><section class="card"><h2>Task 9 — Handle Invalid Input</h2><p>Add the outer <code>else</code> block. According to the guide, values that do not satisfy <code>c0 > 1</code> display <code>Bad c0 value</code>.</p>
+<img class="preview" data-preview="shot8"></section><section class="card"><h2>Task 9 — Handle Invalid Input</h2><p>Finish the outer decision with <code>else</code>. If the starting value does not satisfy <code>c0 > 1</code>, Python skips the Collatz loop and displays <code>Bad c0 value</code>.</p>
 <p><strong>Code:</strong></p>
 <pre class="nocopy">else:
     print(&quot;Bad c0 value&quot;)</pre><label class="upload">Attach Task 9 screenshot
@@ -84,7 +133,19 @@ Invalid input: enter a value that does not satisfy c0 &gt; 1</pre><p><strong>Scr
 <input type="file" accept="image/*" data-shot="shot10"></label>
 <img class="preview" data-preview="shot10"></section>
 
-<section class="card"><h2>Complete Code — Review</h2>
+<section class="card"><h2>Understanding the Indentation</h2><p>This program has an outer <code>if</code>, a <code>while</code> loop, and another <code>if/else</code> inside the loop. Indentation tells Python which statements belong together.</p><pre class="nocopy">if c0 > 1:                 # outer decision
+    steps = 0
+    while c0 != 1:         # repeat until c0 becomes 1
+        if c0 % 2 != 0:    # odd/even decision
+            ...
+        else:
+            ...
+        print(c0)
+        c0 = cnew           # next current number
+        steps += 1          # count this calculation
+    print("steps =", steps) # after the while loop
+else:
+    print("Bad c0 value")</pre><p><strong>Common mistake:</strong> <code>c0 = cnew</code> and <code>steps += 1</code> must stay inside the <code>while</code> loop because both need to happen during every iteration.</p></section><section class="card"><h2>Complete Code — Review</h2>
 <p>After completing the tasks, compare your program with the complete code supplied in the guide.</p>
 <pre class="nocopy">c0 = int(input(&quot;Enter c0: &quot;))
 
