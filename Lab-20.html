@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 20 — The continue statement: The Pretty Vowel Eater</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eaf2ff;font:16px Arial,sans-serif;line-height:1.55}
+main{max-width:980px;margin:auto;padding:28px}.hero,.card{background:#101d30;border:1px solid #263a55;border-radius:16px;padding:24px;margin-bottom:20px}
+.hero h1{margin:.2em 0}h2{color:#fff}label{display:block;margin:12px 0;font-weight:700}
+input[type=text],input[type=date],textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #50637c;background:#091525;color:white;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}code,pre{font-family:ui-monospace,monospace}
+pre{white-space:pre-wrap;background:#050b14;border:1px solid #34465d;padding:16px;border-radius:10px;overflow:auto}
+.nocopy{user-select:none;-webkit-user-select:none;-moz-user-select:none}.upload{padding:14px;border:1px dashed #58708e;border-radius:10px}
+.preview{display:none;max-width:100%;max-height:420px;object-fit:contain;margin-top:12px;border-radius:10px}
+button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:700;cursor:pointer}#status{min-height:24px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+
+<section class="hero"><div>Lab 20 • ITSE 2421</div>
+<h1>The continue statement — The Pretty Vowel Eater</h1>
+<p>Upgrade the Vowel Eater by building a new string containing only the uneaten letters.</p></section>
+
+<section class="card"><h2>Before You Begin</h2>
+<div class="grid"><label>Student Name<input id="studentName" type="text" placeholder="Enter your full name"></label>
+<label>Course<input id="courseName" type="text" value="ITSE 2421" readonly></label></div>
+<label>Date<input id="labDate" type="date"></label>
+<p><strong>Python filename:</strong> <code>Lab20.py</code></p>
+<p>You may use your preferred Python IDE or code editor. <strong>GitHub Codespaces is recommended.</strong></p>
+<p><strong>Important:</strong> Type the program code manually.</p></section>
+
+<section class="card"><h2>Objectives</h2><ul>
+<li>Learn how to modify and upgrade existing code.</li>
+<li>Use the <code>continue</code> statement to skip specific characters in a loop.</li>
+<li>Learn string concatenation to build a new string.</li>
+<li>Apply conditional execution using <code>if-elif-else</code>.</li>
+</ul></section>
+
+<section class="card"><h2>Quick Guide</h2>
+<p><strong><code>.upper()</code></strong> converts the user's word to uppercase.</p>
+<p><strong><code>word_without_vowels = ""</code></strong> creates an empty string that will hold the consonants.</p>
+<p><strong><code>for letter in user_word:</code></strong> processes the word one character at a time.</p>
+<p><strong><code>continue</code></strong> skips the rest of the current iteration when a vowel is found.</p>
+<p><strong><code>+=</code></strong> performs string concatenation here. For example, <code>word_without_vowels += letter</code> adds the current consonant to the end of the string.</p></section>
+
+<section class="card"><h2>Scenario</h2>
+<p>Upgrade the earlier <strong>Vowel Eater</strong>. Instead of printing every uneaten letter on a separate line, store the consonants in a new variable called <code>word_without_vowels</code>. After the loop finishes, print the completed word without vowels all at once.</p></section>
+
+<section class="card"><h2>Task 1 — Ask for User Input</h2><p>Ask the user to enter a word and store it in <code>user_word</code>.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">user_word = input(&quot;Enter your word: &quot;)</pre><label class="upload">Attach Task 1 screenshot
+<input type="file" accept="image/*" data-shot="shot1"></label>
+<img class="preview" data-preview="shot1"></section><section class="card"><h2>Task 2 — Convert the Word to Uppercase</h2><p>Convert the user's word to uppercase with <code>.upper()</code>. This makes the vowel comparisons consistent.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">user_word = user_word.upper()</pre><label class="upload">Attach Task 2 screenshot
+<input type="file" accept="image/*" data-shot="shot2"></label>
+<img class="preview" data-preview="shot2"></section><section class="card"><h2>Task 3 — Initialize an Empty String</h2><p>Create <code>word_without_vowels</code> as an empty string. The program will build the final word by adding consonants to this variable.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">word_without_vowels = &quot;&quot;</pre><label class="upload">Attach Task 3 screenshot
+<input type="file" accept="image/*" data-shot="shot3"></label>
+<img class="preview" data-preview="shot3"></section><section class="card"><h2>Task 4 — Use a for Loop</h2><p>Use a <code>for</code> loop to process each letter in <code>user_word</code>, one character at a time.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">for letter in user_word:</pre><label class="upload">Attach Task 4 screenshot
+<input type="file" accept="image/*" data-shot="shot4"></label>
+<img class="preview" data-preview="shot4"></section><section class="card"><h2>Task 5 — Skip the Vowels Using continue</h2><p>Inside the loop, use the required <code>if/elif</code> checks for A, E, I, O, and U. If the current letter is a vowel, <code>continue</code> skips it.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">if letter == &quot;A&quot;:
+    continue
+elif letter == &quot;E&quot;:
+    continue
+elif letter == &quot;I&quot;:
+    continue
+elif letter == &quot;O&quot;:
+    continue
+elif letter == &quot;U&quot;:
+    continue</pre><label class="upload">Attach Task 5 screenshot
+<input type="file" accept="image/*" data-shot="shot5"></label>
+<img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Add the Uneaten Letters</h2><p>If the current letter is not a vowel, add it to <code>word_without_vowels</code>. The <code>+=</code> operator appends the letter to the existing string.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">else:
+    word_without_vowels += letter</pre><label class="upload">Attach Task 6 screenshot
+<input type="file" accept="image/*" data-shot="shot6"></label>
+<img class="preview" data-preview="shot6"></section><section class="card"><h2>Task 7 — Print the Final Word</h2><p>After the loop has finished, print <code>word_without_vowels</code>. This line belongs outside the loop so the completed word is printed only once.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">print(word_without_vowels)</pre><label class="upload">Attach Task 7 screenshot
+<input type="file" accept="image/*" data-shot="shot7"></label>
+<img class="preview" data-preview="shot7"></section><section class="card"><h2>Task 8 — Test the Program</h2><p>Test your program with the word <code>Gregory</code>. The guide specifies that the expected result is <code>GRGRY</code>.</p>
+<p><strong>Expected Output:</strong></p>
+<pre class="nocopy">Enter your word: Gregory
+GRGRY</pre><p><strong>Screenshot evidence:</strong> Your screenshot should clearly show <code>Gregory</code> as the input and <code>GRGRY</code> as the final output.</p><label class="upload">Attach Task 8 screenshot
+<input type="file" accept="image/*" data-shot="shot8"></label>
+<img class="preview" data-preview="shot8"></section>
+
+<section class="card"><h2>Complete Code — Review</h2>
+<p>After completing the tasks, compare the structure of your program with the complete code from the lab guide.</p>
+<pre class="nocopy">word_without_vowels = &quot;&quot;
+
+user_word = input(&quot;Enter your word: &quot;)
+user_word = user_word.upper()
+
+for letter in user_word:
+    if letter == &quot;A&quot;:
+        continue
+    elif letter == &quot;E&quot;:
+        continue
+    elif letter == &quot;I&quot;:
+        continue
+    elif letter == &quot;O&quot;:
+        continue
+    elif letter == &quot;U&quot;:
+        continue
+    else:
+        word_without_vowels += letter
+
+print(word_without_vowels)</pre></section>
+
+<section class="card"><h2>Reflection Questions</h2>
+<label>1. What is the purpose of <code>word_without_vowels = ""</code>?<textarea id="q1" rows="4"></textarea></label>
+<label>2. What does <code>continue</code> do when the program finds a vowel?<textarea id="q2" rows="4"></textarea></label>
+<label>3. What does <code>word_without_vowels += letter</code> do?<textarea id="q3" rows="4"></textarea></label>
+<label>4. How is this Pretty Vowel Eater different from the previous Vowel Eater?<textarea id="q4" rows="4"></textarea></label>
+<label>5. Why is <code>print(word_without_vowels)</code> placed after the <code>for</code> loop?<textarea id="q5" rows="4"></textarea></label>
+</section>
+
+<section class="card"><h2>Submission</h2>
+<p>Make sure your program runs successfully, attach the required screenshots, answer the reflection questions, and generate your PDF. Submit <code>Lab20.py</code> and the generated PDF as directed by your instructor.</p>
+<button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button>
+<button id="printBtn" type="button">Print / Save as PDF</button><button id="clearBtn" type="button">Clear Saved Progress</button>
+<p id="status" aria-live="polite"></p></section>
+</main>
+
+<script>
+const KEY="lab20_pretty_vowel_eater_v1",shots={};const $=id=>document.getElementById(id);
+function status(msg,bad=false){const e=$("status");if(!e)return;e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function collect(){let r={};for(let i=1;i<=5;i++)r["q"+i]=$("q"+i)?.value||"";return{name:$("studentName")?.value||"",course:$("courseName")?.value||"ITSE 2421",date:$("labDate")?.value||"",r,shots:{...shots}};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(collect()));status("Progress saved.")}catch(e){status("Browser storage is full. Screenshots remain attached on this page for PDF generation.",true);}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if($("studentName"))$("studentName").value=d.name||"";if($("labDate"))$("labDate").value=d.date||"";for(let i=1;i<=5;i++)if($("q"+i))$("q"+i).value=(d.r||{})["q"+i]||"";Object.assign(shots,d.shots||{});Object.entries(shots).forEach(([k,v])=>{const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=v;im.style.display="block";}});}catch(e){}}
+function imageData(file){return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith("image/"))return reject(new Error("Please choose an image file."));const fr=new FileReader();fr.onerror=()=>reject(new Error("Unable to read image."));fr.onload=()=>{const im=new Image();im.onerror=()=>reject(new Error("Unable to decode image."));im.onload=()=>{try{const s=Math.min(1,1200/im.width),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext("2d").drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.72));}catch(e){reject(e);}};im.src=fr.result;};fr.readAsDataURL(file);});}
+function bindScreens(){document.querySelectorAll("[data-shot]").forEach(inp=>inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status("Attaching screenshot...");const d=await imageData(f),k=inp.dataset.shot;shots[k]=d;const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=d;im.style.display="block";}status("Screenshot attached.");}catch(e){status("Could not attach that screenshot. Use PNG or JPG.",true);}});}
+function page(content){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=content;document.body.appendChild(p);return p;}
+async function generatePDF(){let pages=[];const btn=$("pdfBtn");if(btn)btn.disabled=true;try{status("Creating PDF...");if(typeof html2canvas!=="function"||!window.jspdf?.jsPDF)throw new Error("PDF libraries unavailable");const d=collect();pages.push(page(`<h1>Lab 20 — The continue statement: The Pretty Vowel Eater</h1><p><b>Student:</b> ${esc(d.name)} &nbsp; <b>Course:</b> ${esc(d.course)} &nbsp; <b>Date:</b> ${esc(d.date)}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page.</p>`));const items=[1,2,3,4,5,6,7,8].map(i=>({i,s:d.shots["shot"+i]}));for(let x=0;x<items.length;x+=2){let z="<h2>Task Evidence</h2>";items.slice(x,x+2).forEach(v=>z+=`<div style="margin-bottom:22px"><p><b>Task ${v.i} Screenshot</b></p><div style="height:430px;border:1px solid #aaa;padding:10px;display:flex;align-items:center;justify-content:center">${v.s?`<img src="${v.s}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot attached.</em>"}</div></div>`);pages.push(page(z));}const qs=["What is the purpose of word_without_vowels = empty string?","What does continue do when the program finds a vowel?","What does word_without_vowels += letter do?","How is this Pretty Vowel Eater different from the previous Vowel Eater?","Why is print(word_without_vowels) placed after the for loop?"];for(let x=0;x<qs.length;x+=3){let z="<h2>Reflection Questions</h2>";qs.slice(x,x+3).forEach((q,o)=>{const i=x+o+1;z+=`<div style="margin-bottom:22px"><p><b>${i}. ${esc(q)}</b></p><div style="border:1px solid #aaa;min-height:185px;padding:12px;white-space:pre-wrap">${esc(d.r["q"+i])}</div></div>`;});pages.push(page(z));}await new Promise(r=>setTimeout(r,250));const pdf=new window.jspdf.jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.2,backgroundColor:"#fff"});if(i)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297);}pdf.save((d.name||"Student").replace(/[^a-z0-9_-]/gi,"_")+"_Lab20.pdf");status("PDF generated.");}catch(e){console.error(e);status("PDF generation unavailable. Use Print / Save as PDF.",true);}finally{pages.forEach(p=>p.remove());if(btn)btn.disabled=false;}}
+function init(){bindScreens();load();if($("labDate")&&!$("labDate").value)$("labDate").value=new Date().toISOString().slice(0,10);$("saveBtn").onclick=save;$("pdfBtn").onclick=generatePDF;$("printBtn").onclick=()=>window.print();$("clearBtn").onclick=()=>{if(confirm("Clear saved Lab 20 progress?")){localStorage.removeItem(KEY);location.reload();}};document.querySelectorAll(".nocopy").forEach(x=>["copy","cut","contextmenu","dragstart"].forEach(ev=>x.addEventListener(ev,e=>e.preventDefault())));}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+</script></body></html>

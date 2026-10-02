@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 21 — Essentials of the while loop</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eaf2ff;font:16px Arial,sans-serif;line-height:1.55}
+main{max-width:980px;margin:auto;padding:28px}.hero,.card{background:#101d30;border:1px solid #263a55;border-radius:16px;padding:24px;margin-bottom:20px}
+.hero h1{margin:.2em 0}h2{color:#fff}label{display:block;margin:12px 0;font-weight:700}
+input[type=text],input[type=date],textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #50637c;background:#091525;color:white;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}code,pre{font-family:ui-monospace,monospace}
+pre{white-space:pre-wrap;background:#050b14;border:1px solid #34465d;padding:16px;border-radius:10px;overflow:auto}
+.nocopy{user-select:none;-webkit-user-select:none;-moz-user-select:none}.upload{padding:14px;border:1px dashed #58708e;border-radius:10px}
+.preview{display:none;max-width:100%;max-height:420px;object-fit:contain;margin-top:12px;border-radius:10px}
+.note{border-left:4px solid #6da9ff;padding:12px 16px;background:#0a1728;border-radius:8px}
+button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:700;cursor:pointer}#status{min-height:24px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+
+<section class="hero"><div>Lab 21 • ITSE 2421</div>
+<h1>Essentials of the while loop — Building a Pyramid</h1>
+<p>Use a <code>while</code> loop to determine how many complete pyramid layers can be built from a given number of blocks.</p></section>
+
+<section class="card"><h2>Before You Begin</h2>
+<div class="grid"><label>Student Name<input id="studentName" type="text" placeholder="Enter your full name"></label>
+<label>Course<input id="courseName" type="text" value="ITSE 2421" readonly></label></div>
+<label>Date<input id="labDate" type="date"></label>
+<p><strong>Python filename:</strong> <code>Lab21.py</code></p>
+<p>You may use your preferred Python IDE or code editor. <strong>GitHub Codespaces is recommended.</strong></p>
+<p><strong>Important:</strong> Type the program code manually.</p></section>
+
+<section class="card"><h2>Objectives</h2><ul>
+<li>Learn how to use the <code>while</code> loop in Python to solve a problem.</li>
+<li>Understand how to translate a real-life scenario, such as building a pyramid, into computer code.</li>
+<li>Implement a solution based on verbally defined rules using loops and conditionals.</li>
+</ul></section>
+
+<section class="card"><h2>Quick Guide</h2>
+<p><strong><code>blocks</code></strong> stores the number of blocks that are still available.</p>
+<p><strong><code>height</code></strong> counts the number of fully completed pyramid layers.</p>
+<p><strong><code>in_layer</code></strong> stores how many blocks are required to build the current layer. It starts at 1 and increases by 1 after each completed layer.</p>
+<p><strong><code>while in_layer &lt;= blocks:</code></strong> means: keep building while there are enough blocks available to finish the current layer.</p>
+<p><strong><code>+=</code></strong> adds to the current value. <strong><code>-=</code></strong> subtracts from the current value.</p></section>
+
+<section class="card"><h2>Scenario</h2>
+<p>Imagine you are helping a boy and his father, a computer programmer, build a flat pyramid using wooden blocks. Each layer has one block more than the layer above it. Your program must calculate the maximum height that can be built from the available blocks.</p>
+<p>The height is the number of <strong>fully completed layers</strong>. If there are not enough blocks to complete the next layer, construction stops.</p></section>
+
+<section class="card"><h2>Task 1 — Read the Number of Blocks</h2><p>Ask the user how many blocks are available and convert the entered value to an integer.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">blocks = int(input(&quot;Enter the number of blocks: &quot;))</pre><label class="upload">Attach Task 1 screenshot
+<input type="file" accept="image/*" data-shot="shot1"></label>
+<img class="preview" data-preview="shot1"></section><section class="card"><h2>Task 2 — Initialize the Variables</h2><p>Set <code>height</code> to 0 because no layers have been completed yet. Set <code>in_layer</code> to 1 because the first layer needs one block.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">height = 0
+in_layer = 1</pre><label class="upload">Attach Task 2 screenshot
+<input type="file" accept="image/*" data-shot="shot2"></label>
+<img class="preview" data-preview="shot2"></section><section class="card"><h2>Task 3 — Create the while Loop</h2><p>Continue building while there are enough remaining blocks to complete the current layer.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">while in_layer &lt;= blocks:</pre><p><strong>What this means:</strong> Python checks whether the blocks needed for the current layer are less than or equal to the blocks still available. If the condition is true, another complete layer can be built.</p><label class="upload">Attach Task 3 screenshot
+<input type="file" accept="image/*" data-shot="shot3"></label>
+<img class="preview" data-preview="shot3"></section><section class="card"><h2>Task 4 — Build Each Layer</h2><p>Inside the loop, increase the height, subtract the blocks used by the completed layer, and increase <code>in_layer</code> so the next layer requires one more block.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">height += 1
+blocks -= in_layer
+in_layer += 1</pre><p><strong>Follow the changes:</strong> <code>height += 1</code> records a completed layer, <code>blocks -= in_layer</code> removes the blocks that were used, and <code>in_layer += 1</code> increases the size of the next layer.</p><label class="upload">Attach Task 4 screenshot
+<input type="file" accept="image/*" data-shot="shot4"></label>
+<img class="preview" data-preview="shot4"></section><section class="card"><h2>Task 5 — Print the Pyramid Height</h2><p>When there are not enough blocks to complete another layer, the loop stops. Print the number of fully completed layers.</p>
+<p><strong>Code:</strong></p>
+<pre class="nocopy">print(&quot;The height of the pyramid:&quot;, height)</pre><label class="upload">Attach Task 5 screenshot
+<input type="file" accept="image/*" data-shot="shot5"></label>
+<img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Test the Complete Program</h2><p>Run the complete program with a positive number of blocks. Your output should show the maximum number of complete layers that can be built. Try more than one positive value so you can observe how the height changes.</p>
+<p><strong>Example Output Format:</strong></p>
+<pre class="nocopy">Enter the number of blocks: [positive number]
+The height of the pyramid: [calculated height]</pre><p><strong>Note:</strong> The supplied guide does not provide a specific test-data table, so no official test number is being added here.</p><label class="upload">Attach Task 6 screenshot
+<input type="file" accept="image/*" data-shot="shot6"></label>
+<img class="preview" data-preview="shot6"></section>
+
+<section class="card"><h2>About Positive Input</h2>
+<p class="note">The guide says the entered number should be checked to make sure it is positive, but the supplied complete code does not include that validation. This lab therefore keeps the program consistent with the guide's provided complete code rather than adding a new validation routine.</p></section>
+
+<section class="card"><h2>Complete Code — Review</h2>
+<p>After completing the tasks, compare the structure of your program with the complete code supplied in the guide.</p>
+<pre class="nocopy">blocks = int(input(&quot;Enter the number of blocks: &quot;))
+
+height = 0
+in_layer = 1
+
+while in_layer &lt;= blocks:
+    height += 1
+    blocks -= in_layer
+    in_layer += 1
+
+print(&quot;The height of the pyramid:&quot;, height)</pre></section>
+
+<section class="card"><h2>Reflection Questions</h2>
+<label>1. What does the <code>height</code> variable represent?<textarea id="q1" rows="4"></textarea></label>
+<label>2. What does the <code>in_layer</code> variable represent, and why does it begin at 1?<textarea id="q2" rows="4"></textarea></label>
+<label>3. What does the condition <code>in_layer &lt;= blocks</code> check?<textarea id="q3" rows="4"></textarea></label>
+<label>4. Why does the program subtract <code>in_layer</code> from <code>blocks</code> during each loop iteration?<textarea id="q4" rows="4"></textarea></label>
+<label>5. What causes the <code>while</code> loop to stop?<textarea id="q5" rows="4"></textarea></label>
+</section>
+
+<section class="card"><h2>Submission</h2>
+<p>Make sure your program runs successfully, attach the required screenshots, answer the reflection questions, and generate your PDF. Submit <code>Lab21.py</code> and the generated PDF as directed by your instructor.</p>
+<button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button>
+<button id="printBtn" type="button">Print / Save as PDF</button><button id="clearBtn" type="button">Clear Saved Progress</button>
+<p id="status" aria-live="polite"></p></section>
+</main>
+
+<script>
+const KEY="lab21_pyramid_while_v1",shots={};const $=id=>document.getElementById(id);
+function status(msg,bad=false){const e=$("status");if(!e)return;e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function collect(){let r={};for(let i=1;i<=5;i++)r["q"+i]=$("q"+i)?.value||"";return{name:$("studentName")?.value||"",course:$("courseName")?.value||"ITSE 2421",date:$("labDate")?.value||"",r,shots:{...shots}};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(collect()));status("Progress saved.")}catch(e){status("Browser storage is full. Screenshots remain attached on this page for PDF generation.",true);}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if($("studentName"))$("studentName").value=d.name||"";if($("labDate"))$("labDate").value=d.date||"";for(let i=1;i<=5;i++)if($("q"+i))$("q"+i).value=(d.r||{})["q"+i]||"";Object.assign(shots,d.shots||{});Object.entries(shots).forEach(([k,v])=>{const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=v;im.style.display="block";}});}catch(e){}}
+function imageData(file){return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith("image/"))return reject(new Error("Please choose an image file."));const fr=new FileReader();fr.onerror=()=>reject(new Error("Unable to read image."));fr.onload=()=>{const im=new Image();im.onerror=()=>reject(new Error("Unable to decode image."));im.onload=()=>{try{const s=Math.min(1,1200/im.width),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext("2d").drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.72));}catch(e){reject(e);}};im.src=fr.result;};fr.readAsDataURL(file);});}
+function bindScreens(){document.querySelectorAll("[data-shot]").forEach(inp=>inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status("Attaching screenshot...");const d=await imageData(f),k=inp.dataset.shot;shots[k]=d;const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=d;im.style.display="block";}status("Screenshot attached.");}catch(e){status("Could not attach that screenshot. Use PNG or JPG.",true);}});}
+function page(content){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=content;document.body.appendChild(p);return p;}
+async function generatePDF(){let pages=[];const btn=$("pdfBtn");if(btn)btn.disabled=true;try{status("Creating PDF...");if(typeof html2canvas!=="function"||!window.jspdf?.jsPDF)throw new Error("PDF libraries unavailable");const d=collect();pages.push(page(`<h1>Lab 21 — Essentials of the while loop: Building a Pyramid</h1><p><b>Student:</b> ${esc(d.name)} &nbsp; <b>Course:</b> ${esc(d.course)} &nbsp; <b>Date:</b> ${esc(d.date)}</p><hr><h2>Task Evidence</h2><p>Screenshots are arranged two per page.</p>`));const items=[1,2,3,4,5,6].map(i=>({i,s:d.shots["shot"+i]}));for(let x=0;x<items.length;x+=2){let z="<h2>Task Evidence</h2>";items.slice(x,x+2).forEach(v=>z+=`<div style="margin-bottom:22px"><p><b>Task ${v.i} Screenshot</b></p><div style="height:430px;border:1px solid #aaa;padding:10px;display:flex;align-items:center;justify-content:center">${v.s?`<img src="${v.s}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot attached.</em>"}</div></div>`);pages.push(page(z));}const qs=["What does the height variable represent?","What does the in_layer variable represent, and why does it begin at 1?","What does the condition in_layer <= blocks check?","Why does the program subtract in_layer from blocks during each loop iteration?","What causes the while loop to stop?"];for(let x=0;x<qs.length;x+=3){let z="<h2>Reflection Questions</h2>";qs.slice(x,x+3).forEach((q,o)=>{const i=x+o+1;z+=`<div style="margin-bottom:22px"><p><b>${i}. ${esc(q)}</b></p><div style="border:1px solid #aaa;min-height:185px;padding:12px;white-space:pre-wrap">${esc(d.r["q"+i])}</div></div>`;});pages.push(page(z));}await new Promise(r=>setTimeout(r,250));const pdf=new window.jspdf.jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.2,backgroundColor:"#fff"});if(i)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297);}pdf.save((d.name||"Student").replace(/[^a-z0-9_-]/gi,"_")+"_Lab21.pdf");status("PDF generated.");}catch(e){console.error(e);status("PDF generation unavailable. Use Print / Save as PDF.",true);}finally{pages.forEach(p=>p.remove());if(btn)btn.disabled=false;}}
+function init(){bindScreens();load();if($("labDate")&&!$("labDate").value)$("labDate").value=new Date().toISOString().slice(0,10);$("saveBtn").onclick=save;$("pdfBtn").onclick=generatePDF;$("printBtn").onclick=()=>window.print();$("clearBtn").onclick=()=>{if(confirm("Clear saved Lab 21 progress?")){localStorage.removeItem(KEY);location.reload();}};document.querySelectorAll(".nocopy").forEach(x=>["copy","cut","contextmenu","dragstart"].forEach(ev=>x.addEventListener(ev,e=>e.preventDefault())));}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+</script></body></html>
