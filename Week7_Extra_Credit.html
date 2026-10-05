@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 7 Extra Credit - Secure Login Simulator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eaf2ff;font:16px Arial;line-height:1.55}main{max-width:980px;margin:auto;padding:28px}.card,.hero{background:#101d30;border:1px solid #263a55;border-radius:16px;padding:24px;margin:0 0 20px}h1,h2,h3{color:white}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}label{display:block;font-weight:bold;margin:12px 0}input[type=text],input[type=date],textarea{width:100%;padding:12px;margin-top:6px;background:#091525;color:white;border:1px solid #50637c;border-radius:8px}pre{white-space:pre-wrap;background:#050b14;border:1px solid #34465d;padding:16px;border-radius:10px;font-family:monospace}.nocopy{user-select:none}.tip{background:#09182a;border-left:4px solid #6da9ff;padding:14px;border-radius:8px;margin:12px 0}.upload{border:1px dashed #58708e;padding:14px;border-radius:10px}.preview{display:none;max-width:100%;max-height:420px;object-fit:contain;margin-top:10px}button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:bold}@media(max-width:650px){.grid{grid-template-columns:1fr}}</style></head><body><main>
+<section class="hero"><div>Week 7 • Extra Credit • ITSE 2421</div><h1>Secure Login Simulator</h1><p>Build a login simulator using a <code>while</code> loop, an attempts counter, <code>if/else</code>, <code>break</code>, and <code>while-else</code>.</p></section>
+<section class="card"><h2>Before You Begin</h2><div class="grid"><label>Student Name<input id="name" type="text"></label><label>Course<input value="ITSE 2421" readonly type="text"></label></div><label>Date<input id="date" type="date"></label><p><b>Python filename:</b> <code>secure_login_extra_credit.py</code></p><p>You may use your favorite Python IDE or editor. <b>GitHub Codespaces is recommended.</b></p><p><b>Type the Python code manually.</b></p></section>
+<section class="card"><h2>Scenario</h2><p>You are creating a simple secure-login simulator. The program stores the correct password as <code>python123</code>. The user gets up to three attempts. A correct password grants access immediately. Three failed attempts lock the account.</p></section>
+<section class="card"><h2>Quick Guide — Understand the Logic First</h2><p><b>correct_password</b> stores the password the user must match.</p><p><b>attempts</b> counts failed password attempts and begins at 0.</p><p><b>while attempts &lt; 3</b> means the program can keep asking while fewer than three failures have occurred.</p><p><b>break</b> immediately exits the loop after a correct password.</p><div class="tip"><b>Why while-else?</b> The final <code>else</code> belongs to the <code>while</code>. It runs when the loop finishes normally after three failures. If <code>break</code> exits the loop after a correct password, <code>Account locked.</code> is skipped.</div></section>
+<section class="card"><h2>Task 1 — Create your file</h2><p>Create <code>secure_login_extra_credit.py</code>.</p><pre class="nocopy">secure_login_extra_credit.py</pre><p><i>No screenshot required for creating the file.</i></p></section><section class="card"><h2>Task 2 — Store the correct password</h2><p>Store the password as a string. Quotation marks tell Python this is text.</p><pre class="nocopy">correct_password = &quot;python123&quot;</pre><label class="upload">Attach Task 2 screenshot<input type="file" accept="image/*" data-shot="shot2"></label><img class="preview" data-preview="shot2"></section><section class="card"><h2>Task 3 — Create the attempts counter</h2><p>Start at 0 because no incorrect attempts have happened yet.</p><pre class="nocopy">attempts = 0</pre><label class="upload">Attach Task 3 screenshot<input type="file" accept="image/*" data-shot="shot3"></label><img class="preview" data-preview="shot3"></section><section class="card"><h2>Task 4 — Start the while loop</h2><p>Keep repeating while the failed-attempt counter is less than 3.</p><pre class="nocopy">while attempts &lt; 3:</pre><label class="upload">Attach Task 4 screenshot<input type="file" accept="image/*" data-shot="shot4"></label><img class="preview" data-preview="shot4"></section><section class="card"><h2>Task 5 — Ask for the password</h2><p>This line goes inside the loop, so the user is prompted each time the loop repeats.</p><pre class="nocopy">password = input(&quot;Enter your password: &quot;)</pre><label class="upload">Attach Task 5 screenshot<input type="file" accept="image/*" data-shot="shot5"></label><img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Check the password</h2><p>If the password matches, grant access and <code>break</code>. If it is wrong, deny access and increase the failed-attempt counter.</p><pre class="nocopy">if password == correct_password:
+    print(&quot;Access granted.&quot;)
+    break
+else:
+    print(&quot;Access denied. Try again.&quot;)
+    attempts += 1</pre><div class="tip"><b>Important:</b> <code>attempts += 1</code> happens only when the password is wrong. A correct password uses <code>break</code> and ends the loop.</div><label class="upload">Attach Task 6 screenshot<input type="file" accept="image/*" data-shot="shot6"></label><img class="preview" data-preview="shot6"></section><section class="card"><h2>Task 7 — Add the while-else lockout</h2><p>This <code>else</code> lines up with <code>while</code>. It runs only if the loop ends without <code>break</code>.</p><pre class="nocopy">else:
+    print(&quot;Account locked.&quot;)</pre><label class="upload">Attach Task 7 screenshot<input type="file" accept="image/*" data-shot="shot7"></label><img class="preview" data-preview="shot7"></section><section class="card"><h2>Task 8 — Test your program</h2><p>Run both required tests and compare your output with the expected results.</p><pre class="nocopy">TEST A
+Input: python123
+Expected: Access granted.
+
+TEST B
+Inputs: aaa, bbb, ccc
+Expected:
+Access denied. Try again.
+Access denied. Try again.
+Access denied. Try again.
+Account locked.</pre><label class="upload">Attach Task 8 screenshot<input type="file" accept="image/*" data-shot="shot8"></label><img class="preview" data-preview="shot8"></section><section class="card"><h2>Understanding the Indentation</h2><pre class="nocopy">while attempts &lt; 3:
+    password = input(...)
+
+    if password == correct_password:
+        print("Access granted.")
+        break
+    else:                         # belongs to IF
+        print("Access denied. Try again.")
+        attempts += 1
+else:                             # belongs to WHILE
+    print("Account locked.")</pre><p>The final <code>else</code> must line up with <code>while</code>, not with <code>if</code>.</p></section>
+<section class="card"><h2>Complete Code — Review</h2><pre class="nocopy"># Extra Credit: Secure Login Simulator (Week 7 Loops)
+# Uses: while loop, counter variable, break, while-else
+
+correct_password = &quot;python123&quot;
+attempts = 0
+
+while attempts &lt; 3:
+    password = input(&quot;Enter your password: &quot;)
+
+    if password == correct_password:
+        print(&quot;Access granted.&quot;)
+        break
+    else:
+        print(&quot;Access denied. Try again.&quot;)
+        attempts += 1
+else:
+    print(&quot;Account locked.&quot;)</pre></section>
+<section class="card"><h2>Reflection Questions</h2><label>1. What does the attempts variable keep track of?<textarea id="q1" rows="4"></textarea></label><label>2. Why does the program use while attempts &lt; 3?<textarea id="q2" rows="4"></textarea></label><label>3. What happens when break runs?<textarea id="q3" rows="4"></textarea></label><label>4. Why does attempts increase only after a wrong password?<textarea id="q4" rows="4"></textarea></label><label>5. When does the while-else display Account locked.?<textarea id="q5" rows="4"></textarea></label></section><section class="card"><h2>Submission</h2><p>Complete both tests, attach the required screenshots, answer the reflections, and generate your PDF. Submit <code>secure_login_extra_credit.py</code> and the PDF.</p><button onclick="save()">Save Progress</button><button onclick="makePDF()">Generate PDF</button><button onclick="window.print()">Print / Save as PDF</button><p id="status"></p></section></main>
+<script>
+const shots={}, ids=[2,3,4,5,6,7,8], KEY="week7_secure_login_ec";
+const E=id=>document.getElementById(id); function msg(x){E("status").textContent=x}
+function imgData(f){return new Promise((r,j)=>{let R=new FileReader();R.onload=()=>{let I=new Image();I.onload=()=>{let z=Math.min(1,1200/I.width),c=document.createElement("canvas");c.width=I.width*z;c.height=I.height*z;c.getContext("2d").drawImage(I,0,0,c.width,c.height);r(c.toDataURL("image/jpeg",.72))};I.src=R.result};R.onerror=j;R.readAsDataURL(f)})}
+document.querySelectorAll("[data-shot]").forEach(x=>x.onchange=async()=>{let f=x.files[0];if(!f)return;let d=await imgData(f),k=x.dataset.shot;shots[k]=d;let im=document.querySelector('[data-preview="'+k+'"]');im.src=d;im.style.display="block";msg("Screenshot attached.")});
+function data(){let q={};for(let i=1;i<=5;i++)q[i]=E("q"+i).value;return{name:E("name").value,date:E("date").value,q,shots:{...shots}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data()));msg("Progress saved.")}catch(e){msg("Screenshots remain attached; browser storage may be full.")}}
+function page(h){let p=document.createElement("div");p.style.cssText="position:absolute;left:-99999px;width:794px;min-height:1123px;background:white;color:#111;padding:42px;font-family:Arial;box-sizing:border-box";p.innerHTML=h;document.body.appendChild(p);return p}
+async function makePDF(){let ps=[];try{msg("Creating PDF...");let d=data();ps.push(page(`<h1>Week 7 Extra Credit — Secure Login Simulator</h1><p><b>Student:</b> ${d.name} &nbsp; <b>Course:</b> ITSE 2421 &nbsp; <b>Date:</b> ${d.date}</p>`));for(let x=0;x<ids.length;x+=2){let h="<h2>Task Evidence</h2>";ids.slice(x,x+2).forEach(i=>h+=`<p><b>Task ${i}</b></p><div style="height:430px;border:1px solid #aaa;display:flex;align-items:center;justify-content:center">${shots["shot"+i]?`<img src="${shots["shot"+i]}" style="max-width:100%;max-height:100%">`:"No screenshot attached"}</div>`);ps.push(page(h))}for(let x=0;x<5;x+=3){let h="<h2>Reflection Questions</h2>";qs.slice(x,x+3).forEach((q,o)=>{let i=x+o+1;h+=`<p><b>${i}. ${q}</b></p><div style="min-height:185px;border:1px solid #aaa;padding:12px">${d.q[i]||""}</div>`});ps.push(page(h))}let P=new jspdf.jsPDF("p","mm","a4");for(let i=0;i<ps.length;i++){let c=await html2canvas(ps[i],{scale:1.2,backgroundColor:"#fff"});if(i)P.addPage();P.addImage(c.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297)}P.save((d.name||"Student").replace(/[^a-z0-9_-]/gi,"_")+"_Week7_Extra_Credit.pdf");msg("PDF generated.")}catch(e){msg("PDF generation unavailable. Use Print / Save as PDF.")}finally{ps.forEach(p=>p.remove())}}
+const qs=["What does the attempts variable keep track of?", "Why does the program use while attempts < 3?", "What happens when break runs?", "Why does attempts increase only after a wrong password?", "When does the while-else display Account locked.?"]; 
+try{let d=JSON.parse(localStorage.getItem(KEY)||"null");if(d){E("name").value=d.name||"";E("date").value=d.date||"";for(let i=1;i<=5;i++)E("q"+i).value=(d.q||{})[i]||"";Object.assign(shots,d.shots||{});Object.entries(shots).forEach(([k,v])=>{let im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=v;im.style.display="block"}})}}catch(e){}
+if(!E("date").value)E("date").value=new Date().toISOString().slice(0,10);document.querySelectorAll(".nocopy").forEach(x=>["copy","cut","contextmenu","dragstart"].forEach(ev=>x.addEventListener(ev,e=>e.preventDefault())));
+</script></body></html>
