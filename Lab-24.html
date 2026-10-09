@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lab 24 — The Basics of Lists: The Beatles</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eaf2ff;font:16px Arial,sans-serif;line-height:1.55}
+main{max-width:980px;margin:auto;padding:28px}.hero,.card{background:#101d30;border:1px solid #263a55;border-radius:16px;padding:24px;margin-bottom:20px}
+.hero h1{margin:.2em 0}h2{color:#fff}label{display:block;margin:12px 0;font-weight:700}
+input[type=text],input[type=date],textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #50637c;background:#091525;color:white;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}code,pre{font-family:ui-monospace,monospace}
+pre{white-space:pre-wrap;background:#050b14;border:1px solid #34465d;padding:16px;border-radius:10px;overflow:auto}
+.nocopy{user-select:none;-webkit-user-select:none;-moz-user-select:none}.upload{padding:14px;border:1px dashed #58708e;border-radius:10px}
+.preview{display:none;max-width:100%;max-height:420px;object-fit:contain;margin-top:12px;border-radius:10px}
+.rule{background:#09182a;border-left:4px solid #6da9ff;padding:14px;border-radius:8px}
+button{padding:11px 15px;margin:5px;border:0;border-radius:8px;font-weight:700;cursor:pointer}#status{min-height:24px}
+@media(max-width:650px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+
+<section class="hero"><div>Lab 24 • ITSE 2421</div><h1>The Basics of Lists — The Beatles</h1><p>Practice building and changing a Python list with <code>append()</code>, <code>del</code>, <code>insert()</code>, and a <code>for</code> loop.</p></section>
+<section class="card"><h2>Before You Begin</h2><div class="grid"><label>Student Name<input id="studentName" type="text" placeholder="Enter your full name"></label><label>Course<input id="courseName" type="text" value="ITSE 2421" readonly></label></div><label>Date<input id="labDate" type="date"></label><p><strong>Python filename:</strong> <code>Lab24.py</code></p><p>You may use your preferred Python IDE or editor. <strong>GitHub Codespaces is recommended.</strong> Type the Python code manually.</p></section>
+<section class="card"><h2>Objectives</h2><p>Create and modify simple lists. Practice adding elements with <code>append()</code>, removing elements with <code>del</code>, and inserting elements with <code>insert()</code>.</p></section>
+<section class="card"><h2>Quick Guide — Understanding List Changes</h2><p><strong>Empty list:</strong> <code>Beatles = []</code> creates a list with no members.</p><p><strong>append(value):</strong> adds a new item to the <em>end</em> of a list.</p><p><strong>for i in range(2):</strong> repeats the indented statements two times. Here it asks for two names.</p><p><strong>del Beatles[-1]:</strong> deletes the last item. Repeating it twice deletes the two most recently added members.</p><p><strong>insert(0, value):</strong> places an item at the beginning, shifting the existing members to the right.</p><p><strong>len(Beatles):</strong> returns the total number of members in the list.</p><p><strong>Important:</strong> Python is case-sensitive. Use <code>Beatles</code> consistently, with a capital B, as in the guide.</p></section>
+<section class="card"><h2>Scenario</h2><p>The Beatles went through lineup changes before the familiar four-member configuration. You will simulate the changes using a Python list: begin with John Lennon, Paul McCartney, and George Harrison; temporarily add Stu Sutcliffe and Pete Best; remove the temporary members; then insert Ringo Starr at the beginning.</p></section>
+<section class="card"><h2>Follow the List Before Coding</h2><pre class="nocopy">Step 1: []
+Step 2: ['John Lennon', 'Paul McCartney', 'George Harrison']
+Step 3: [the original three, 'Stu Sutcliffe', 'Pete Best']
+Step 4: ['John Lennon', 'Paul McCartney', 'George Harrison']
+Step 5: ['Ringo Starr', 'John Lennon', 'Paul McCartney', 'George Harrison']
+The Fab: 4</pre><p>This walkthrough assumes you enter the two temporary names in the order shown in the guide.</p></section>
+<section class="card"><h2>Task 1 — Create an Empty List</h2><p>Create <code>Lab24.py</code>. Start with an empty list named <code>Beatles</code>. The square brackets <code>[]</code> mean there are no members yet. Print it to see <code>[]</code>.</p><pre class="nocopy"># step 1:
+Beatles = []
+print(&quot;Step 1:&quot;, Beatles)</pre><p><em>No screenshot required for this setup step.</em></p></section><section class="card"><h2>Task 2 — Add Three Initial Members</h2><p>Use <code>append()</code> three times. Each call adds one name to the <strong>end</strong> of the list. The list now contains John Lennon, Paul McCartney, and George Harrison, in that order.</p><pre class="nocopy"># step 2:
+Beatles.append(&quot;John Lennon&quot;)
+Beatles.append(&quot;Paul McCartney&quot;)
+Beatles.append(&quot;George Harrison&quot;)
+print(&quot;Step 2:&quot;, Beatles)</pre><label class="upload">Attach Task 2 screenshot<input type="file" accept="image/*" data-shot="shot2"></label><img class="preview" data-preview="shot2"></section><section class="card"><h2>Task 3 — Add Two Temporary Members</h2><p>Use <code>for i in range(2)</code> to repeat the indented input statement exactly twice. Enter <strong>Stu Sutcliffe</strong> first and <strong>Pete Best</strong> second when prompted. <code>append(input(...))</code> adds each entered name to the end of the list.</p><pre class="nocopy"># step 3:
+for i in range(2):
+    Beatles.append(input(&quot;New band member: &quot;))
+print(&quot;Step 3:&quot;, Beatles)</pre><label class="upload">Attach Task 3 screenshot<input type="file" accept="image/*" data-shot="shot3"></label><img class="preview" data-preview="shot3"></section><section class="card"><h2>Task 4 — Remove the Temporary Members</h2><p>The index <code>-1</code> means the last list element. The first <code>del Beatles[-1]</code> removes Pete Best; the second removes Stu Sutcliffe. After both deletions, only the original three names remain.</p><pre class="nocopy"># step 4:
+del Beatles[-1]
+del Beatles[-1]
+print(&quot;Step 4:&quot;, Beatles)</pre><label class="upload">Attach Task 4 screenshot<input type="file" accept="image/*" data-shot="shot4"></label><img class="preview" data-preview="shot4"></section><section class="card"><h2>Task 5 — Insert Ringo Starr at the Beginning</h2><p>Use <code>insert(0, "Ringo Starr")</code>. Unlike <code>append()</code>, which adds at the end, <code>insert()</code> lets you choose the position. Index <code>0</code> is the beginning of the list.</p><pre class="nocopy"># step 5:
+Beatles.insert(0, &quot;Ringo Starr&quot;)
+print(&quot;Step 5:&quot;, Beatles)</pre><label class="upload">Attach Task 5 screenshot<input type="file" accept="image/*" data-shot="shot5"></label><img class="preview" data-preview="shot5"></section><section class="card"><h2>Task 6 — Count and Test the Final Members</h2><p>Add the final <code>len()</code> statement from the complete guide, then run the entire program. After adding Ringo Starr, the list contains four names, so the final line should say <code>The Fab: 4</code>.</p><pre class="nocopy"># Testing the list length
+print(&quot;The Fab:&quot;, len(Beatles))</pre><label class="upload">Attach Task 6 screenshot<input type="file" accept="image/*" data-shot="shot6"></label><img class="preview" data-preview="shot6"></section><section class="card"><h2>Complete Code — Review</h2><p>After completing the tasks, compare your work with the full code in the supplied guide. The final <code>len()</code> line is included.</p><pre class="nocopy"># step 1:
+Beatles = []
+print(&quot;Step 1:&quot;, Beatles)
+
+# step 2:
+Beatles.append(&quot;John Lennon&quot;)
+Beatles.append(&quot;Paul McCartney&quot;)
+Beatles.append(&quot;George Harrison&quot;)
+print(&quot;Step 2:&quot;, Beatles)
+
+# step 3:
+for i in range(2):
+    Beatles.append(input(&quot;New band member: &quot;))
+print(&quot;Step 3:&quot;, Beatles)
+
+# step 4:
+del Beatles[-1]
+del Beatles[-1]
+print(&quot;Step 4:&quot;, Beatles)
+
+# step 5:
+Beatles.insert(0, &quot;Ringo Starr&quot;)
+print(&quot;Step 5:&quot;, Beatles)
+
+# Testing the list length
+print(&quot;The Fab:&quot;, len(Beatles))</pre></section><section class="card"><h2>Reflection Questions</h2><label>1. What is the purpose of starting with Beatles = []?<textarea id="q1" rows="4"></textarea></label><label>2. How does append() change the list, and where does the new item go?<textarea id="q2" rows="4"></textarea></label><label>3. Why does for i in range(2) ask for two names?<textarea id="q3" rows="4"></textarea></label><label>4. What does -1 mean in del Beatles[-1], and why is the statement used twice?<textarea id="q4" rows="4"></textarea></label><label>5. How is insert(0, &quot;Ringo Starr&quot;) different from append(), and why does the final len() return 4?<textarea id="q5" rows="4"></textarea></label></section>
+
+<section class="card"><h2>Submission</h2>
+<p>Make sure your program runs successfully, attach the required screenshots, answer the reflection questions, and generate your PDF. Submit <code>Lab24.py</code> and the generated PDF as directed by your instructor.</p>
+<button id="saveBtn" type="button">Save Progress</button><button id="pdfBtn" type="button">Generate PDF</button>
+<button id="printBtn" type="button">Print / Save as PDF</button><button id="clearBtn" type="button">Clear Saved Progress</button>
+<p id="status" aria-live="polite"></p></section>
+</main>
+
+<script>
+const KEY="lab24_beatles_v1",shots={};const $=id=>document.getElementById(id);
+const SHOT_IDS=[2,3,4,5,6];
+function status(msg,bad=false){const e=$("status");if(!e)return;e.textContent=msg;e.style.color=bad?"#ff9c9c":"#70e6a0";}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));}
+function collect(){let r={};for(let i=1;i<=5;i++)r["q"+i]=$("q"+i)?.value||"";return{name:$("studentName")?.value||"",course:$("courseName")?.value||"ITSE 2421",date:$("labDate")?.value||"",r,shots:{...shots}};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(collect()));status("Progress saved.")}catch(e){status("Browser storage is full. Screenshots remain attached on this page for PDF generation.",true);}}
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"null");if(!d)return;if($("studentName"))$("studentName").value=d.name||"";if($("labDate"))$("labDate").value=d.date||"";for(let i=1;i<=5;i++)if($("q"+i))$("q"+i).value=(d.r||{})["q"+i]||"";Object.assign(shots,d.shots||{});Object.entries(shots).forEach(([k,v])=>{const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=v;im.style.display="block";}});}catch(e){}}
+function imageData(file){return new Promise((resolve,reject)=>{if(!file||!file.type.startsWith("image/"))return reject(new Error("Please choose an image file."));const fr=new FileReader();fr.onerror=()=>reject(new Error("Unable to read image."));fr.onload=()=>{const im=new Image();im.onerror=()=>reject(new Error("Unable to decode image."));im.onload=()=>{try{const s=Math.min(1,1200/im.width),c=document.createElement("canvas");c.width=Math.max(1,Math.round(im.width*s));c.height=Math.max(1,Math.round(im.height*s));c.getContext("2d").drawImage(im,0,0,c.width,c.height);resolve(c.toDataURL("image/jpeg",.72));}catch(e){reject(e);}};im.src=fr.result;};fr.readAsDataURL(file);});}
+function bindScreens(){document.querySelectorAll("[data-shot]").forEach(inp=>inp.onchange=async()=>{const f=inp.files?.[0];if(!f)return;try{status("Attaching screenshot...");const d=await imageData(f),k=inp.dataset.shot;shots[k]=d;const im=document.querySelector('[data-preview="'+k+'"]');if(im){im.src=d;im.style.display="block";}status("Screenshot attached.");}catch(e){status("Could not attach that screenshot. Use PNG or JPG.",true);}});}
+function page(content){const p=document.createElement("div");p.style.cssText="position:absolute;left:-100000px;top:0;width:794px;min-height:1123px;background:#fff;color:#111;padding:42px;font-family:Arial,sans-serif;line-height:1.45;box-sizing:border-box";p.innerHTML=content;document.body.appendChild(p);return p;}
+async function generatePDF(){let pages=[];const btn=$("pdfBtn");if(btn)btn.disabled=true;try{status("Creating PDF...");if(typeof html2canvas!=="function"||!window.jspdf?.jsPDF)throw new Error("PDF libraries unavailable");const d=collect();pages.push(page(`<h1>Lab 24 — The Basics of Lists: The Beatles</h1><p><b>Student:</b> ${esc(d.name)} &nbsp; <b>Course:</b> ${esc(d.course)} &nbsp; <b>Date:</b> ${esc(d.date)}</p><hr><h2>Task Evidence</h2><p>Required screenshots are arranged two per page.</p>`));const items=SHOT_IDS.map(i=>({i,s:d.shots["shot"+i]}));for(let x=0;x<items.length;x+=2){let z="<h2>Task Evidence</h2>";items.slice(x,x+2).forEach(v=>z+=`<div style="margin-bottom:22px"><p><b>Task ${v.i} Screenshot</b></p><div style="height:430px;border:1px solid #aaa;padding:10px;display:flex;align-items:center;justify-content:center">${v.s?`<img src="${v.s}" style="max-width:100%;max-height:100%;object-fit:contain">`:"<em>No screenshot attached.</em>"}</div></div>`);pages.push(page(z));}const qs=["What is the purpose of starting with Beatles = []?", "How does append() change the list, and where does the new item go?", "Why does for i in range(2) ask for two names?", "What does -1 mean in del Beatles[-1], and why is the statement used twice?", "How is insert(0, \"Ringo Starr\") different from append(), and why does the final len() return 4?"];for(let x=0;x<qs.length;x+=3){let z="<h2>Reflection Questions</h2>";qs.slice(x,x+3).forEach((q,o)=>{const i=x+o+1;z+=`<div style="margin-bottom:22px"><p><b>${i}. ${esc(q)}</b></p><div style="border:1px solid #aaa;min-height:185px;padding:12px;white-space:pre-wrap">${esc(d.r["q"+i])}</div></div>`;});pages.push(page(z));}await new Promise(r=>setTimeout(r,250));const pdf=new window.jspdf.jsPDF("p","mm","a4");for(let i=0;i<pages.length;i++){const c=await html2canvas(pages[i],{scale:1.2,backgroundColor:"#fff"});if(i)pdf.addPage();pdf.addImage(c.toDataURL("image/jpeg",.9),"JPEG",0,0,210,297);}pdf.save((d.name||"Student").replace(/[^a-z0-9_-]/gi,"_")+"_Lab24.pdf");status("PDF generated.");}catch(e){console.error(e);status("PDF generation unavailable. Use Print / Save as PDF.",true);}finally{pages.forEach(p=>p.remove());if(btn)btn.disabled=false;}}
+function init(){bindScreens();load();if($("labDate")&&!$("labDate").value)$("labDate").value=new Date().toISOString().slice(0,10);$("saveBtn").onclick=save;$("pdfBtn").onclick=generatePDF;$("printBtn").onclick=()=>window.print();$("clearBtn").onclick=()=>{if(confirm("Clear saved Lab 23 progress?")){localStorage.removeItem(KEY);location.reload();}};document.querySelectorAll(".nocopy").forEach(x=>["copy","cut","contextmenu","dragstart"].forEach(ev=>x.addEventListener(ev,e=>e.preventDefault())));}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
+</script></body></html>
